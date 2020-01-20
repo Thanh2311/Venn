@@ -6,7 +6,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println("Hello World");
 		System.out.println("lab 0 testing");
-		VennGui vg = new VennGui();
+		//VennGui vg = new VennGui();
+		ComponentGenerator cGen = new ComponentGenerator();
 	}
 
 }

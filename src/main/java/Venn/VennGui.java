@@ -14,32 +14,40 @@ public class VennGui extends JFrame{
 	public VennGui() {
 		super();
 		setSize(1500,820);
-		//setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
-		//diagram
+		/*diagram
 		diag = new JPanel();
 		diag.setSize(diagSize);
 		diag.setBounds(300,0,1200,720);
 		diag.setBackground(Color.GRAY);
 		//this.add(diag,BorderLayout.WEST);
 		add(diag);
+		*/
 		
 		//controls menu
 		control = new JPanel();
 		control.setSize(conSize);
 		control.setBounds(0,0,300,720);
 		control.setBackground(Color.RED);
-		//this.add(control,BorderLayout.EAST);
-		add(control);
+		this.add(control,BorderLayout.EAST);
+		
+		//add component generator
+		ComponentGenerator cGen = new ComponentGenerator();
+		//this.add(cGen,BorderLayout.CENTER);
+		
+		//add(control);
 		
 		//context menu
 		context = new JPanel();
 		context.setSize(texSize);
 		context.setBounds(0,720,1500,100);
 		context.setBackground(Color.BLUE);
-		//this.add(context,BorderLayout.SOUTH);
-		add(context);
+		this.add(context,BorderLayout.SOUTH);
+		/*add(context);
+		*/
 		
 	}
 	
