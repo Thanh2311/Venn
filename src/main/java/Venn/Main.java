@@ -7,6 +7,10 @@ public class Main {
 		System.out.println("Hello World");
 		System.out.println("lab 0 testing");
 		System.out.println("branch/merge test  evenennn more testing");
+		ComponentGenerator cGen = new ComponentGenerator();
+		//VennGui vg = new VennGui();
+		
+		
 	}
 
 }
