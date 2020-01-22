@@ -87,7 +87,16 @@ public class WindowBuilderGui {
 		panel_5.add(textField_1);
 		
 		JButton button_5 = new JButton("Generate Item");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("testes");
+				//Set.
+			}
+		});
 		panel_3.add(button_5);
+		
+		Set panel_1 = new Set();
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 	}
 
 	
