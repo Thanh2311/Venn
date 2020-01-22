@@ -3,25 +3,46 @@ package vennData;
 public class ComponentList {
 	
 	ComponentListNode first, last;
-	int size;
+	int legnth, diagSize;
 	
 	public ComponentList() {
+		diagSize = 2;
 		this.first = null;
 		this.last = null;
-		size = 0;
+		legnth = 0;
+	}
+	
+	public ComponentList(int size) {
+		diagSize = size;
+		this.first = null;
+		this.last = null;
+		legnth = 0;
 	}
 	
 	public void append(Component c) {
-		if (this.size == 0) {
+		if (this.legnth == 0) {
 			ComponentListNode node = new ComponentListNode(c,null, null);
 			this.first = node;
 			this.last = node;
+			legnth ++;
 		}else {
 			ComponentListNode node = new ComponentListNode(c, null, this.last);
 			this.last.setNext(node);
 			this.last = node;
+			legnth ++;
+		} 
+	}
+	
+	public int getSize() {
+		return this.diagSize;
+	}
+	
+	public void setSize(int size) {
+		if(size <2) {
+			
+		}else {
+			diagSize = size;
 		}
-		size ++;
 	}
 	
 	public String toString() {

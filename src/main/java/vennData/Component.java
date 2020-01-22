@@ -17,6 +17,10 @@ public class Component {
 		return attributes;
 	}
 	
+	public void setAttributes(byte[] attr) {
+		this.attributes = attr;
+	}
+	
 	public String toString() {
 		String out = this.componentName;
 		out += " ";
