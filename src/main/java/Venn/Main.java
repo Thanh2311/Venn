@@ -15,6 +15,8 @@ public class Main {
 			System.out.println(b-48);
 		}
 		
+		//vennData.TestGUI tg = new TestGUI();
+		
 		vennData.testShell tsh = new vennData.testShell();
 	}
 

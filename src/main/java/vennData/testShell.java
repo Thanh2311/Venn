@@ -36,7 +36,10 @@ public class testShell {
 					break;
 				case("break"):
 					hold = false;
-				break;
+					break;
+				case("generate"):
+					ArrayDiagram ag = new ArrayDiagram(cl);
+					break;
 			}
 		}
 		lc.close();

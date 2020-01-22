@@ -45,6 +45,10 @@ public class ComponentList {
 		}
 	}
 	
+	public ComponentListNode getFirst() {
+		return this.first;
+	}
+	
 	public String toString() {
 		String out = "";
 		ComponentListNode next = first;

@@ -17,6 +17,11 @@ public class ComponentListNode{
 	public ComponentListNode getPrevious() {
 		return this.previous;
 	}
+	
+	public Component getComponenet() {
+		return this.c;
+	}
+	
 	public void setNext(ComponentListNode node) {
 		this.next = node;
 	}
@@ -24,6 +29,13 @@ public class ComponentListNode{
 		this.previous = node;
 	}
 	
+	public boolean hasNext() {
+		if(this.next == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	public String toString() {
 		return c.toString();
 	}
