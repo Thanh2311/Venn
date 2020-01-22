@@ -23,4 +23,8 @@ public class ComponentListNode{
 	public void setPrevious(ComponentListNode node){
 		this.previous = node;
 	}
+	
+	public String toString() {
+		return c.toString();
+	}
 }

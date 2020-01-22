@@ -16,4 +16,14 @@ public class Component {
 	public byte[] getAttributes() {
 		return attributes;
 	}
+	
+	public String toString() {
+		String out = this.componentName;
+		out += " ";
+		for(byte b: attributes) {
+			out += (b + ",");
+		}
+		return out;
+	}
+	
 }

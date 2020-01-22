@@ -17,9 +17,21 @@ public class ComponentList {
 			this.first = node;
 			this.last = node;
 		}else {
-			ComponentListNode node = new ComponentListNode(c,this.last, null);
+			ComponentListNode node = new ComponentListNode(c, null, this.last);
 			this.last.setNext(node);
 			this.last = node;
 		}
+		size ++;
+	}
+	
+	public String toString() {
+		String out = "";
+		ComponentListNode next = first;
+		while(next != null) {
+			out += next.toString();
+			out += "\n";
+			next = next.getNext();
+		}
+		return out;
 	}
 }
