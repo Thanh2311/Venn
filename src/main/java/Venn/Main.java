@@ -1,5 +1,7 @@
 package Venn;
 
+import vennData.*;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -7,7 +9,15 @@ public class Main {
 		System.out.println("Hello World");
 		System.out.println("lab 0 testing");
 		//VennGui vg = new VennGui();
-		ComponentGenerator cGen = new ComponentGenerator();
+		String test = "123";
+		byte[] ts = test.getBytes();
+		for(byte b: ts) {
+			System.out.println(b-48);
+		}
+		
+		//vennData.TestGUI tg = new TestGUI();
+		
+		vennData.testShell tsh = new vennData.testShell();
 	}
 
 }
