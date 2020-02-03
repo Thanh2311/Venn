@@ -1,6 +1,6 @@
 package vennData;
 
-public class Component {
+public class Component implements Comparable<Component>{
 	private String componentName;
 	private byte[] attributes;
 	
@@ -28,6 +28,11 @@ public class Component {
 			out += (b + ",");
 		}
 		return out;
+	}
+
+	@Override
+	public int compareTo(Component o) {
+		return this.getName().compareTo(o.getName());
 	}
 	
 }
