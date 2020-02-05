@@ -13,21 +13,31 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 public class FXController {
-
 	
 	@FXML private Label leftLabel;
 	@FXML private Label rightLabel;
 	@FXML private TextField textbox;
-	@FXML private Pane newLabelPane;
+	@FXML private Pane newLabelPaneLeft;
+	@FXML private Pane newLabelPaneRight;
+	@FXML private Pane selectedPane;
 	
+	/*
+	 * This adds a new label to left set's vbox
+	 */	
 	@FXML public void addEleButton(ActionEvent event) {
 		
-		Label lbl1 = new Label(textbox.getText());
-		lbl1.setAlignment(Pos.CENTER);
-		lbl1.setFont(new Font("Ariel Bold", 15));
-	    newLabelPane.getChildren().add(lbl1);
-	   
-		
+		if (!textbox.getText().isEmpty()) {		
+			Label lbl1 = new Label(textbox.getText());
+			lbl1.setAlignment(Pos.CENTER);
+			lbl1.setFont(new Font("Ariel Bold", 15));
+		    newLabelPaneLeft.getChildren().add(lbl1);
+		}
 	}
 	
+	@FXML public void selectedSet(ActionEvent event) {
+		selectedPane = (Pane) event.getSource();
+		
+		
+		
+	}
 }

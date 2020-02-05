@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
    <children>
-      <BorderPane prefHeight="600.0" prefWidth="800.0">
+      <BorderPane layoutX="3.0" layoutY="3.0" prefHeight="600.0" prefWidth="800.0">
          <center>
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="269.0" prefWidth="392.0" BorderPane.alignment="CENTER">
                <children>
@@ -29,9 +28,7 @@
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Circle fill="#e3595966" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
-                              <VBox fx:id="newLabelPane" maxHeight="-Infinity" maxWidth="-Infinity" />
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" StackPane.alignment="CENTER" />
-                              <AnchorPane prefHeight="188.0" prefWidth="198.0" StackPane.alignment="CENTER" />
+                              <VBox fx:id="newLabelPaneLeft" maxHeight="-Infinity" maxWidth="-Infinity" />
                            </children>
                         </StackPane>
                      </children>
@@ -43,7 +40,12 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Circle fill="#2197ff66" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <Circle fill="#2197ff66" onMouseClicked="#selectedSet" radius="126.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_RIGHT" />
+                              <VBox fx:id="newLabelPaneRight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                </children>
@@ -58,7 +60,7 @@
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Rename" />
                      </children>
                   </HBox>
-                  <TextField fx:id="textbox" promptText="blue" />
+                  <TextField fx:id="textbox" promptText="Type Name Here" />
                </children>
                <padding>
                   <Insets left="5.0" top="50.0" />
