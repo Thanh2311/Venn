@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
@@ -21,10 +22,10 @@ public class FXController {
 	@FXML private Pane newLabelPaneLeft;
 	@FXML private Pane newLabelPaneRight;
 	@FXML private Pane selectedPane;
-	//@FXML private Shape selectedShape;
+	@FXML private Shape selectedShape;
 	
 	/*
-	 * Adds a new Label to the selected Sets VBox, default Left
+	 * Adds a new Label to the selected Set's VBox, default Left
 	 */	
 	@FXML public void addEleButton(ActionEvent event) {
 		
@@ -47,6 +48,18 @@ public class FXController {
 		selectedPane = (VBox) x.getChildren().get(1);	
 		Pane parentPane = (VBox) x.getParent();
 		Label selectedLabel = (Label)parentPane.getChildren().get(0);
+		if (!(selectedShape == null)) {
+			selectedShape.setStrokeWidth(1);
+		}
+		selectedShape = (Shape) x.getChildren().get(0);
+		selectedShape.setStrokeWidth(3);
 		System.out.println(selectedLabel.getText()+ " Selected");
+	}
+	
+	@FXML public void context(ContextMenuEvent event) {
+		System.out.println("hi");
+		
+		
+		
 	}
 }

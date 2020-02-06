@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
    <children>
       <BorderPane layoutX="3.0" layoutY="3.0" prefHeight="600.0" prefWidth="800.0">
          <center>
@@ -27,7 +27,7 @@
                         </Label>
                         <StackPane onMouseClicked="#selectSet" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Circle fill="#e3595966" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="#e35b5b66" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
                               <VBox fx:id="newLabelPaneLeft" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" />
                            </children>
                         </StackPane>
@@ -40,13 +40,9 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <StackPane onMouseClicked="#selectSet" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane onContextMenuRequested="#context" onMouseClicked="#selectSet" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <AnchorPane pickOnBounds="false">
-                                 <children>
-                                    <Circle fill="#2197ff66" layoutX="126.0" layoutY="126.0" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
-                                 </children>
-                              </AnchorPane>
+                              <Circle fill="#2197ff66" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
                               <VBox fx:id="newLabelPaneRight" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" />
                            </children>
                         </StackPane>
