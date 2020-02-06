@@ -12,38 +12,42 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
    <children>
       <BorderPane layoutX="3.0" layoutY="3.0" prefHeight="600.0" prefWidth="800.0">
          <center>
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="269.0" prefWidth="392.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="252.0" StackPane.alignment="CENTER_LEFT">
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="273.0" prefWidth="252.0" StackPane.alignment="CENTER_LEFT">
                      <children>
                         <Label fx:id="leftLabel" alignment="TOP_RIGHT" text="Left Set">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane onMouseClicked="#selectSet" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Circle fill="#e3595966" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
-                              <VBox fx:id="newLabelPaneLeft" maxHeight="-Infinity" maxWidth="-Infinity" />
+                              <VBox fx:id="newLabelPaneLeft" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" />
                            </children>
                         </StackPane>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" StackPane.alignment="CENTER_RIGHT">
                      <children>
                         <Label fx:id="rightLabel" alignment="TOP_RIGHT" text="Right Set">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane onMouseClicked="#selectSet" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Circle fill="#2197ff66" onMouseClicked="#selectedSet" radius="126.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_RIGHT" />
-                              <VBox fx:id="newLabelPaneRight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+                              <AnchorPane pickOnBounds="false">
+                                 <children>
+                                    <Circle fill="#2197ff66" layoutX="126.0" layoutY="126.0" radius="126.0" stroke="BLACK" strokeType="INSIDE" />
+                                 </children>
+                              </AnchorPane>
+                              <VBox fx:id="newLabelPaneRight" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" />
                            </children>
                         </StackPane>
                      </children>
