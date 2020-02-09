@@ -22,6 +22,7 @@ public class FXController {
 	@FXML private Pane newLabelPaneRight;
 	@FXML private Pane selectedPane;
 	@FXML private Shape selectedShape;
+	@FXML private Label selectedLabel;
 	
 	/*
 	 * Adds a new Label to the selected Set's VBox, default Left
@@ -35,6 +36,7 @@ public class FXController {
 			element.setFont(font);
 			element.setWrapText(true);
 		    selectedPane.getChildren().add(element);
+		    System.out.println("\"" + textbox.getText() + "\" added to " + selectedLabel.getText());
 		}
 			textbox.setText("");
 			textbox.requestFocus();
@@ -59,7 +61,7 @@ public class FXController {
 
 		
 		Pane parentPane = (VBox)x.getParent();
-		Label selectedLabel = (Label)parentPane.getChildren().get(0);
+		selectedLabel = (Label)parentPane.getChildren().get(0);
 		
 		System.out.println(selectedLabel.getText()+ " Selected");
 	}
