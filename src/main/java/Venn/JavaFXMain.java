@@ -22,9 +22,9 @@ public class JavaFXMain extends Application {
 			Scene scene = new Scene(root,600,450);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Venn Diagram Example");
-			primaryStage.setResizable(false);
-			primaryStage.sizeToScene();
-			primaryStage.initStyle(StageStyle.UNIFIED);
+			// primaryStage.setResizable(false);
+			//primaryStage.sizeToScene();
+			//primaryStage.initStyle(StageStyle.UNIFIED);
 			primaryStage.show();
 			
 			
