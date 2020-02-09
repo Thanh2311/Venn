@@ -115,6 +115,7 @@
                      </children>
                   </HBox>
                   <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Enter name here" />
+
                </children>
                <BorderPane.margin>
                   <Insets bottom="20.0" />

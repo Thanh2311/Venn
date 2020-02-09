@@ -56,7 +56,7 @@ public class FXController {
 		selectedShape.setStrokeWidth(4);
 		
 		selectedPane = (VBox)x.getChildren().get(1);
-		
+
 		
 		Pane parentPane = (VBox)x.getParent();
 		Label selectedLabel = (Label)parentPane.getChildren().get(0);
