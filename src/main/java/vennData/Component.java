@@ -17,7 +17,7 @@ public class Component implements Comparable<Component>{
 		return attributes;
 	}
 	
-	public void setAttributes(byte[] attr) {
+	public void setAttributes(byte[] attr) {//need way to sort attribute list
 		this.attributes = attr;
 	}
 	
