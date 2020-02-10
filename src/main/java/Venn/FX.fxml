@@ -110,7 +110,7 @@
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity">
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
-                        <Button disable="true" mnemonicParsing="false" text="Rename" />
+                        <Button mnemonicParsing="false" onAction="#rename" text="Rename" />
                         <Button disable="true" mnemonicParsing="false" text="Delete" />
                      </children>
                   </HBox>

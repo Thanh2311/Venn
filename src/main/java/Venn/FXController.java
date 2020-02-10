@@ -77,6 +77,18 @@ public class FXController {
 	}
 	
 	@FXML 
+	public void rename(ActionEvent event) {
+		
+		if (selectedLabel != null) {
+			String oldLabel = selectedLabel.getText();
+			selectedLabel.setText(textbox.getText());
+			System.out.println("\"" + oldLabel + "\" renamed to \"" + selectedLabel.getText() + "\".");
+		}
+		
+	
+	}
+	
+	@FXML 
 	public void context(ContextMenuEvent event) {
 		System.out.println("test");
 		
