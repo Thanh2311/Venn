@@ -9,15 +9,17 @@ public class Main {
 		System.out.println("Hello World");
 		System.out.println("lab 0 testing");
 		//VennGui vg = new VennGui();
-		String test = "123";
+		String test = "321";
 		byte[] ts = test.getBytes();
-		for(byte b: ts) {
-			System.out.println(b-48);
+		for(int i = 0; i<ts.length; i++) {
+			ts[i] = (byte)((ts[i]-48)%10);
+			System.out.println(ts[i]);
 		}
-		
+		System.out.println("-------------------------------");
 		//vennData.TestGUI tg = new TestGUI();
-		
-		vennData.testShell tsh = new vennData.testShell();
+		MatrixDiagram md = new MatrixDiagram();
+		System.out.println(MatrixDiagram.test_getIndex(ts,4));
+		//vennData.testShell tsh = new vennData.testShell();
 	}
 
 }

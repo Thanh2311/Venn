@@ -21,15 +21,29 @@ public class MatrixDiagram {
 	
 	//private static int 
 	
+	public static int test_getIndex(byte[] attributes, int sets) {
+		int i = attributes.length + 1;
+		int j = 0;
+		for (int k = 0; k < attributes.length; k++) {
+			j += choose((int)(sets-attributes[k]), k+1);
+			System.out.println(choose(sets-attributes[k], k+1));
+		}
+		return j;
+	}
+	
 	private static int factorial(int n) {
-		if (n == 0) {
+		if (n <= 0) {
 			return 1;
 		}else {
-			return factorial(n-1);
+			return factorial(n-1) * n;
 		}
 	}
 	
-	private static int choose(int s, int k) {
+	public static int choose(int s, int k) {
+		//System.out.println(s);
+		if(s<=0) {
+			return 0;
+		}
 		int choose = factorial(s) / (factorial(s - k) * factorial(k));
 		return choose;
 	}
