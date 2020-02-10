@@ -9,7 +9,7 @@ public class testShell {
 		sets = 2;
 		Scanner sc = new Scanner(System.in);
 		Scanner lc = new Scanner("");
-		ComponentList cl = new ComponentList(sets);
+		ComponentList cl = new ComponentList();
 		boolean hold = true;
 		while (hold) {
 			String input = sc.nextLine();

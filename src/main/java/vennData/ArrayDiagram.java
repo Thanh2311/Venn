@@ -30,7 +30,7 @@ public class ArrayDiagram {
 	}
 	
 	public void genDiagram(ComponentList list) {
-		ComponentListNode next = list.first;
+		ComponentListNode next = list.getFirst();
 			while(next!=null) {
 				addComponent(next.getComponenet());
 				next = next.getNext();

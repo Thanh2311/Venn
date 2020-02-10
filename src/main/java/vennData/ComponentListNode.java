@@ -2,8 +2,8 @@ package vennData;
 
 public class ComponentListNode{
 	
-	public Component c;
-	public ComponentListNode next, previous;
+	private Component c;
+	private ComponentListNode next, previous;
 	
 	public ComponentListNode(Component c, ComponentListNode next, ComponentListNode previous) {
 		this.c = c;
