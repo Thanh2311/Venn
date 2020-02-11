@@ -1,6 +1,6 @@
 package vennData;
 
-public class MatrixDiagram {
+public class MatrixDiagram<G> {
 	private Object[][] setMatrix;
 	private int sets;
 	
@@ -19,10 +19,27 @@ public class MatrixDiagram {
 	
 	//private void populateMatrix
 	
-	//private static int 
+	public void setFromAttributes(byte[] attributes, G e){
+		int i = attributes.length - 1;
+		int j = 0;
+		for (int k = 0; k < attributes.length; k++) {
+			j += choose((int)(sets-attributes[k]), k+1);
+		}
+		setMatrix[i][j] = e;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getFromAttributes(byte[] attributes){
+		int i = attributes.length - 1;
+		int j = 0;
+		for (int k = 0; k < attributes.length; k++) {
+			j += choose((int)(sets-attributes[k]), k+1);
+		}
+		return (G) setMatrix[i][j];
+	}
 	
 	public static int test_getIndex(byte[] attributes, int sets) {
-		int i = attributes.length + 1;
+		int i = attributes.length - 1;
 		int j = 0;
 		for (int k = 0; k < attributes.length; k++) {
 			j += choose((int)(sets-attributes[k]), k+1);
@@ -39,7 +56,7 @@ public class MatrixDiagram {
 		}
 	}
 	
-	public static int choose(int s, int k) {
+	private static int choose(int s, int k) {
 		//System.out.println(s);
 		if(s<=0) {
 			return 0;
