@@ -12,7 +12,7 @@ public class MatrixDiagram<G> {
 	private void generateMatrix() {
 		setMatrix = new Object[sets][];
 		for(int i = 0; i < sets; i++) {
-			int length = choose(sets, i);
+			int length = choose(sets, i+1);
 			setMatrix[i] = new Object[length];
 		}
 	}
@@ -36,6 +36,10 @@ public class MatrixDiagram<G> {
 			j += choose((int)(sets-attributes[k]), k+1);
 		}
 		return (G) setMatrix[i][j];
+	}
+	
+	public int getSize(){
+		return this.sets;
 	}
 	
 	public static int test_getIndex(byte[] attributes, int sets) {
