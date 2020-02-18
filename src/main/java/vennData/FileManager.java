@@ -11,4 +11,6 @@ public class FileManager { //maybe use an xml, or json format, need to figure ou
 		this.filePath = filePath;
 		f = new File(filePath);
 	}
+	
+	
 }

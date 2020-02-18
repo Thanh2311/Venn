@@ -34,6 +34,14 @@ public class MatrixDiagram {
 		return setMatrix[i][j];
 	}
 	
+	public void loadFromComponentList (ComponentList list){
+		ComponentListNode next = list.getFirst();
+		while (next != null){
+			byte[] attributes = next.getComponent().getAttributes();
+			this.getFromAttributes(attributes).append(next.getComponent());
+			next = next.getNext();
+		}
+	}
 	
 	public int getSize(){
 		return this.sets;
