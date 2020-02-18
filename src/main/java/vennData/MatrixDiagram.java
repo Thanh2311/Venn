@@ -9,6 +9,11 @@ public class MatrixDiagram<G> {
 		this.generateMatrix();
 	}
 	
+	public MatrixDiagram(int size) { //up to  sets
+		this.sets = size;
+		this.generateMatrix();
+	}
+	
 	private void generateMatrix() {
 		setMatrix = new Object[sets][];
 		for(int i = 0; i < sets; i++) {
@@ -43,7 +48,7 @@ public class MatrixDiagram<G> {
 	}
 	
 	public static int test_getIndex(byte[] attributes, int sets) {
-		int i = attributes.length - 1;
+		//int i = attributes.length - 1;
 		int j = 0;
 		for (int k = 0; k < attributes.length; k++) {
 			j += choose((int)(sets-attributes[k]), k+1);

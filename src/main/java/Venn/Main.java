@@ -9,7 +9,7 @@ public class Main {
 		System.out.println("Hello World");
 		System.out.println("lab 0 testing");
 		//VennGui vg = new VennGui();
-		String test = "2";
+		String test = "21";
 		byte[] ts = test.getBytes();
 		for(int i = 0; i<ts.length; i++) {
 			ts[i] = (byte)((ts[i]-48)%10);
