@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,20 +19,20 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
    <children>
-      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#deselect" pickOnBounds="false">
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#deselect" opacity="0.0" pickOnBounds="false">
          <children>
-            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#dddddd69" height="450.0" stroke="#00000073" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="600.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#dddddd69" height="600.0" stroke="#00000073" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="800.0" />
          </children>
       </Pane>
-      <BorderPane pickOnBounds="false" prefHeight="450.0" prefWidth="600.0">
+      <BorderPane pickOnBounds="false" prefHeight="600.0" prefWidth="800.0">
          <center>
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="300.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="439.0" prefWidth="150.0" StackPane.alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" text="Left Set">
+                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnLabel" text="Left Set">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -52,12 +54,12 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" StackPane.alignment="CENTER_RIGHT">
                      <children>
-                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" text="Right Set">
+                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnLabel" text="Right Set">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <StackPane alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#context" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="300.0" prefWidth="150.0">
+                        <StackPane alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="300.0" prefWidth="150.0">
                            <children>
                               <Circle blendMode="DARKEN" fill="#2197ff66" radius="150.0" stroke="BLACK" strokeType="INSIDE" />
                               <VBox fx:id="newLabelPaneRight" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="150.0">
@@ -74,7 +76,7 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Label fx:id="rightLabel1" alignment="TOP_RIGHT" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
+                        <Label alignment="TOP_RIGHT" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -110,14 +112,21 @@
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity">
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
-                        <Button mnemonicParsing="false" onAction="#rename" text="Rename" />
+                        <Button disable="true" mnemonicParsing="false" onAction="#rename" text="Rename" />
                         <Button disable="true" mnemonicParsing="false" text="Delete" />
                      </children>
                   </HBox>
-                  <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Enter name here" />
+                  <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addEleButton" promptText="Enter name here">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu></TextField>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="70.0" />
                </BorderPane.margin>
             </VBox>
          </bottom>
