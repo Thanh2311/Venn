@@ -32,7 +32,7 @@
                <children>
                   <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="439.0" prefWidth="150.0" StackPane.alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnLabel" text="Left Set">
+                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnTitle" text="Left Set">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -54,7 +54,7 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" StackPane.alignment="CENTER_RIGHT">
                      <children>
-                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnLabel" text="Right Set">
+                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnTitle" text="Right Set" textAlignment="RIGHT">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -76,7 +76,7 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Label alignment="TOP_RIGHT" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
+                        <Label fx:id="placeholder" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnElement" pickOnBounds="false" text="Middle" visible="false">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

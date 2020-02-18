@@ -10,13 +10,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
@@ -25,11 +24,13 @@ import javafx.scene.text.Font;
 
 public class FXController {
 
-	Font font = new Font("System Bold", 14);
+	private Font font;
 	@FXML
 	private Label leftLabel;
 	@FXML
 	private Label rightLabel;
+	@FXML
+	private Label placeholder;
 	@FXML
 	private TextField textbox;
 	@FXML
@@ -41,37 +42,49 @@ public class FXController {
 	@FXML
 	private Shape selectedShape;
 	@FXML
+	private Label selectedTitle;
+	@FXML
+	private Label selectedElement;
+	@FXML
 	private Label selectedLabel;
 	@FXML
-	private ContextMenu context;
-
+	private ContextMenu contextElement;
+	@FXML
+	private ContextMenu contextTitle;
+	
+	
 	@FXML
 	private void initialize() {
 
+		font = new Font("System Bold", 14);
+		
 		MenuItem rename = new MenuItem("Rename");
 		MenuItem delete = new MenuItem("Delete");
 		MenuItem custom = new MenuItem("Customize");
-		context = new ContextMenu(rename, delete, custom);
-
+		
 		rename.setOnAction(new EventHandler<ActionEvent>() {
 			
 //			Opens a window to rename the label right clicked on.
 			@Override
 			public void handle(ActionEvent event) {
 				
-				TextInputDialog dialog = new TextInputDialog(selectedLabel.getText());		
-				dialog.setTitle("Rename " + selectedLabel.getText());
+				String oldText = selectedLabel.getText();
+				TextInputDialog dialog = new TextInputDialog(oldText);		
+				dialog.setTitle("Rename " + oldText);
 				dialog.setHeaderText(null);
 				dialog.setGraphic(null);
-				Optional<String> result = dialog.showAndWait();
+				Optional<String> result = dialog.showAndWait();	
 				String newText = dialog.getEditor().getText();
-				if (result.isPresent() && !newText.trim().isEmpty())
-				selectedLabel.setText(newText);
+				//checks if you clicked ok or cancel
+				if (result.isPresent() && !newText.trim().isEmpty()) {
+					selectedLabel.setText(newText);
+					System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
+				}
+
 					
 			}
 		});
 
-		
 		
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -84,13 +97,26 @@ public class FXController {
 				dialog.setHeaderText("Are you sure you want to delete this element?");
 				dialog.setGraphic(null);
 				Optional<ButtonType> result = dialog.showAndWait();
-				if (result.get() == ButtonType.OK)
-				((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
+				//checks if you clicked ok or cancel
+				if (result.get() == ButtonType.OK)	{	
+					System.out.printf("\"%s\" deleted\n", selectedLabel.getText() );
+					((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
+				}
 					
 			}
 		});
 		
-
+		contextTitle = new ContextMenu(rename, custom);
+		contextElement = new ContextMenu(delete);
+		
+		//duplicates MenuItems because they are associated with only one ContextMenu
+		for (MenuItem titleItem : contextTitle.getItems()) {		
+			MenuItem eleItem = new MenuItem(titleItem.getText());
+			eleItem.setGraphic(titleItem.getGraphic());
+			eleItem.setOnAction(titleItem.getOnAction());
+			contextElement.getItems().add(eleItem);
+			
+		}
 	}
 
 	/*
@@ -105,9 +131,9 @@ public class FXController {
 			element.setFont(font);
 			element.setWrapText(true);
 			selectedPane.getChildren().add(element);
-			element.setContextMenu(context);
-			selectedLabel = element;
-			System.out.println("\"" + textbox.getText() + "\" added to " + selectedLabel.getText());
+			element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
+			selectedElement = element;
+			System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
 		}
 		textbox.setText("");
 		textbox.requestFocus();
@@ -121,33 +147,51 @@ public class FXController {
 	 */
 	@FXML
 	public void selectSet(MouseEvent event) {
-
-		Pane x = (Pane) event.getSource();
-
-		if (selectedShape != null) {
-			selectedShape.setStrokeWidth(1);
+		
+		if(event.getButton() == MouseButton.PRIMARY) {
+		
+			Pane x = (Pane) event.getSource();
+	
+			if (selectedShape != null) {
+				selectedShape.setStrokeWidth(1);
+			}
+			selectedShape = (Shape) x.getChildren().get(0);
+			selectedShape.setStrokeWidth(4);
+	
+			selectedPane = (VBox) x.getChildren().get(1);
+			
+			selectedTitle = ((Label)((Pane)((Pane)event.getSource()).getParent()).getChildren().get(0));
+	
+			System.out.println(((Label)((VBox) x.getParent()).getChildren().get(0)).getText() + " selected");
+			//System.out.println(selectedLabel.getText() + " Selected");
 		}
-		selectedShape = (Shape) x.getChildren().get(0);
-		selectedShape.setStrokeWidth(4);
-
-		selectedPane = (VBox) x.getChildren().get(1);
-
-		System.out.println(((Label)((VBox) x.getParent()).getChildren().get(0)).getText() + " Selected");
-		//System.out.println(selectedLabel.getText() + " Selected");
-
 	}
 
+	
 	/* Opens a context menu on the requested label */
-
 	@FXML
-	public void contextOnLabel(ContextMenuEvent event) {
+	public void contextOnElement(ContextMenuEvent event) {
 
-		selectedLabel = (Label) event.getSource();
-		System.out.println(selectedLabel.getText() + " Selected");
-		context.show(selectedLabel, event.getScreenX(), event.getScreenY());
+		selectedElement = (Label) event.getSource();
+		selectedLabel = selectedElement;
+		System.out.println(selectedElement.getText() + " selected");
+		contextElement.show(selectedElement, event.getScreenX(), event.getScreenY());
+
+	}
+	
+	
+	/* Opens a context menu on the requested title */
+	@FXML
+	public void contextOnTitle(ContextMenuEvent event) {
+
+		selectedTitle = (Label) event.getSource();
+		selectedLabel = selectedTitle;
+		System.out.println(selectedTitle.getText() + " selected");
+		contextTitle.show(selectedTitle, event.getScreenX(), event.getScreenY());
 
 	}
 
+	
 	@FXML
 	public void deselect(MouseEvent event) {
 
@@ -157,14 +201,16 @@ public class FXController {
 		}
 
 	}
-
+	
+	
+	//Depreciated
 	@FXML
 	public void rename(ActionEvent event) {
 
-		if (selectedLabel != null) {
-			String oldLabel = selectedLabel.getText();
-			selectedLabel.setText(textbox.getText());
-			System.out.println("\"" + oldLabel + "\" renamed to \"" + selectedLabel.getText() + "\".");
+		if (selectedElement != null) {
+			String oldLabel = selectedElement.getText();
+			selectedElement.setText(textbox.getText());
+			System.out.println("\"" + oldLabel + "\" renamed to \"" + selectedElement.getText() + "\".");
 		}
 
 	}
