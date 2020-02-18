@@ -35,7 +35,7 @@ public class ComponentList {
 	}
 	
 	public int getLength() {
-		return this.getLength();
+		return this.length;
 	}
 	
 	public ComponentListNode getFirst() {

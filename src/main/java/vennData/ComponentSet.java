@@ -1,98 +1,72 @@
 package vennData;
 
 public class ComponentSet { //TODO, change implementation to array-based to allow indexing and easier sorting/finding
-	private ComponentListNode first, last;
-	private int length;
+	private int length = 25;
+	Component[] arr1;
+	private int index;
 	
 	public ComponentSet() {
-		this.first = null;
-		this.last = null;
-		length = 0;
+		
+		arr1 = new Component[length];
+		index = 0;
+
 	}
 	
 	public void append(Component c) {
-		if (this.length == 0) {
-			ComponentListNode node = new ComponentListNode(c,null, null);
-			this.first = node;
-			this.last = node;
-			length ++;
+		if (index < length) {
+			arr1[index] = c;
+			index ++;
 			
 		}else {
 		
-			boolean hasComponent = false;
-			ComponentListNode next = first;
-			while(next != null) {
-				if(next.getComponent().equals(c)) {
-					hasComponent = true;
-					break;
-				}
-				next = next.getNext();
-			}
-			if(hasComponent) {
+			Component[] arrDouble = new Component[2*arr1.length];
+			for(int i =0; i<arr1.length; i++) {
+				arrDouble[i] = arr1[i];
 				
-			}else {
-				ComponentListNode node = new ComponentListNode(c, null, this.last);
-				this.last.setNext(node);
-				this.last = node;
-				length ++;
 			}
+			
+			arr1 = arrDouble;
+			arr1[index] = c;
 		}
 	}
 	
 	public void remove(Component c) {
-		if (this.length == 1) {
-			this.first = null;
-			this.last = null;
-			length = 0;
-			
-		}else {
-			ComponentListNode next = first;
-			while(next != null) {
-				if(next.getComponent().equals(c)) {
-					//delet this
-					if(!next.hasNext()) {
-						next.getPrevious().setNext(null);
-						this.last = next.getPrevious();
-					}else if(!next.hasPrevious()) {
-						next.getNext().setPrevious(null);
-						this.first = next.getNext();
-					}else {
-						next.getNext().setPrevious(next.getPrevious());
-						next.getPrevious().setNext(next.getNext());
-					}
-					break;
-				}
-				next = next.getNext();
-			}
+		int temp = -1;
+		for(int i =0; i < index; i++) {
+			if(arr1[i] == c) {temp = i; break;}
 		}
-
+		
+		for(int j = temp + 1; j <= index; j++ ) {
+		arr1[temp] = null;
+		
+		arr1[j-1] = arr1[j];}
+		index--;
 	}
 	
 	public int getLength() {
-		return this.getLength();
+		return index;
 	}
 	
-	public ComponentListNode getFirst() {
-		return this.first;
+	public Component getFirst() {
+		return arr1[0];
 	}
 	
 	public String toString() {
 		String out = "";
-		ComponentListNode next = first;
-		while(next != null) {
-			out += next.toString();
+		
+		for(int i = 0; i< index; i++) {
+			out += arr1[i];
 			out += "\n";
-			next = next.getNext();
 		}
 		return out;
 	}
 	
 	public ComponentList toList() {
 		ComponentList list = new ComponentList();
-		ComponentListNode next = first;
-		while(next != null) {
-			list.append(next.getComponent());
-			next = next.getNext();
+		int i = 0;
+		while (i < index) {
+			list.append(arr1[i]);
+			i++;
 		}
 		return list;
 	}

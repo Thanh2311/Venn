@@ -6,14 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 
-
-		
-
-		System.out.println("lab 0 testing");
-=======
->>>>>>> refs/remotes/origin/develop
 		//VennGui vg = new VennGui();
 		String test = "321";
 		byte[] ts = test.getBytes();
@@ -21,14 +14,11 @@ public class Main {
 			ts[i] = (byte)((ts[i]-48)%10);
 			System.out.println(ts[i]);
 		}
-<<<<<<< HEAD
-		ComponentGenerator a = new ComponentGenerator();
-=======
+
 		byte[] ts2 = {3,1};
 		byte[] ts3 = {2,1};
 		byte[] ts4 = {2};
 		System.out.println("-------------------------------");
->>>>>>> refs/remotes/origin/develop
 		
 		MatrixDiagram md = new MatrixDiagram(3);
 		Component cp = new Component("hi", ts);

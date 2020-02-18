@@ -30,7 +30,6 @@ public class Component implements Comparable<Component>{
 		return out;
 	}
 
-	@Override
 	public int compareTo(Component o) {
 		return this.getName().compareTo(o.getName());
 	}

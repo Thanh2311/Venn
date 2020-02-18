@@ -65,7 +65,6 @@ public class FXController {
 		rename.setOnAction(new EventHandler<ActionEvent>() {
 			
 //			Opens a window to rename the label right clicked on.
-			@Override
 			public void handle(ActionEvent event) {
 				
 				String oldText = selectedLabel.getText();
@@ -89,7 +88,6 @@ public class FXController {
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 			
 //			Opens a window to delete the label right clicked on.
-			@Override
 			public void handle(ActionEvent event) {
 				
 				Alert dialog = new Alert(AlertType.CONFIRMATION);		
