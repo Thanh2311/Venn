@@ -2,8 +2,8 @@ package vennData;
 
 public class ComponentListNode{
 	
-	public Component c;
-	public ComponentListNode next, previous;
+	private Component c;
+	private ComponentListNode next, previous;
 	
 	public ComponentListNode(Component c, ComponentListNode next, ComponentListNode previous) {
 		this.c = c;
@@ -18,7 +18,7 @@ public class ComponentListNode{
 		return this.previous;
 	}
 	
-	public Component getComponenet() {
+	public Component getComponent() {
 		return this.c;
 	}
 	
@@ -36,6 +36,14 @@ public class ComponentListNode{
 			return true;
 		}
 	}
+	public boolean hasPrevious() {
+		if(this.previous == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 	public String toString() {
 		return c.toString();
 	}
