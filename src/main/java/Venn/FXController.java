@@ -1,14 +1,21 @@
 package Venn;
 
+import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -47,20 +54,43 @@ public class FXController {
 		context = new ContextMenu(rename, delete, custom);
 
 		rename.setOnAction(new EventHandler<ActionEvent>() {
-
+			
+//			Opens a window to rename the label right clicked on.
 			@Override
 			public void handle(ActionEvent event) {
-				rename(event);
-
+				
+				TextInputDialog dialog = new TextInputDialog(selectedLabel.getText());		
+				dialog.setTitle("Rename " + selectedLabel.getText());
+				dialog.setHeaderText(null);
+				dialog.setGraphic(null);
+				Optional<String> result = dialog.showAndWait();
+				String newText = dialog.getEditor().getText();
+				if (result.isPresent() && !newText.trim().isEmpty())
+				selectedLabel.setText(newText);
+					
 			}
 		});
 
-//		leftLabel.setOnContextMenuRequested(e ->{
-//			selectLabel(e);
-//			context.show(leftLabel, e.getScreenX(), e.getScreenY());
-//		});
-//		
-		// leftLabel.setContextMenu(context);
+		
+		
+		delete.setOnAction(new EventHandler<ActionEvent>() {
+			
+//			Opens a window to delete the label right clicked on.
+			@Override
+			public void handle(ActionEvent event) {
+				
+				Alert dialog = new Alert(AlertType.CONFIRMATION);		
+				dialog.setTitle("Confirm Delete : " + selectedLabel.getText());
+				dialog.setHeaderText("Are you sure you want to delete this element?");
+				dialog.setGraphic(null);
+				Optional<ButtonType> result = dialog.showAndWait();
+				if (result.get() == ButtonType.OK)
+				((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
+					
+			}
+		});
+		
+
 	}
 
 	/*
@@ -112,8 +142,7 @@ public class FXController {
 	@FXML
 	public void contextOnLabel(ContextMenuEvent event) {
 
-		Label x = (Label) event.getSource();
-		selectedLabel = x;
+		selectedLabel = (Label) event.getSource();
 		System.out.println(selectedLabel.getText() + " Selected");
 		context.show(selectedLabel, event.getScreenX(), event.getScreenY());
 
