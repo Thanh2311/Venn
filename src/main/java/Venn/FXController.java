@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
@@ -30,9 +31,11 @@ public class FXController {
 	@FXML
 	private Label rightLabel;
 	@FXML
-	private Label placeholder;
+	private Label placeholder;	//Placeholder only required for element context menus
 	@FXML
 	private TextField textbox;
+	@FXML
+	private Button addButton;
 	@FXML
 	private Pane newLabelPaneLeft;
 	@FXML
@@ -46,7 +49,7 @@ public class FXController {
 	@FXML
 	private Label selectedElement;
 	@FXML
-	private Label selectedLabel;
+	private Label selectedLabel;	//Use only this field to refer to selected label
 	@FXML
 	private ContextMenu contextElement;
 	@FXML
@@ -149,7 +152,9 @@ public class FXController {
 	public void selectSet(MouseEvent event) {
 		
 		if(event.getButton() == MouseButton.PRIMARY) {
-		
+			
+			addButton.setDisable(false);
+			textbox.requestFocus();
 			Pane x = (Pane) event.getSource();
 	
 			if (selectedShape != null) {
@@ -159,16 +164,15 @@ public class FXController {
 			selectedShape.setStrokeWidth(4);
 	
 			selectedPane = (VBox) x.getChildren().get(1);
-			
-			selectedTitle = ((Label)((Pane)((Pane)event.getSource()).getParent()).getChildren().get(0));
+			selectedTitle = ((Label)((Pane)(x).getParent()).getChildren().get(0));
 	
-			System.out.println(((Label)((VBox) x.getParent()).getChildren().get(0)).getText() + " selected");
-			//System.out.println(selectedLabel.getText() + " Selected");
+			System.out.println(selectedTitle.getText() + " selected");
+
 		}
 	}
 
 	
-	/* Opens a context menu on the requested label */
+	/* Opens a context menu on the requested element */
 	@FXML
 	public void contextOnElement(ContextMenuEvent event) {
 
@@ -196,6 +200,7 @@ public class FXController {
 	public void deselect(MouseEvent event) {
 
 		if (selectedShape != null) {
+			addButton.setDisable(true);
 			selectedShape.setStrokeWidth(1);
 			selectedShape.requestFocus();
 		}
