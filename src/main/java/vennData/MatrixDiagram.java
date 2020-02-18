@@ -1,47 +1,39 @@
 package vennData;
 
-public class MatrixDiagram<G> {
-	private Object[][] setMatrix;
+public class MatrixDiagram {
+	private ComponentSet[][] setMatrix;
 	private int sets;
 	
 	public MatrixDiagram() { //default 2 sets
 		sets = 2;
-		this.generateMatrix();
+		this.populateMatrix();
 	}
 	
 	public MatrixDiagram(int size) { //up to  sets
 		this.sets = size;
-		this.generateMatrix();
+		this.populateMatrix();
 	}
 	
-	private void generateMatrix() {
-		setMatrix = new Object[sets][];
+	private void populateMatrix() {
+		setMatrix = new ComponentSet[sets][];
 		for(int i = 0; i < sets; i++) {
 			int length = choose(sets, i+1);
-			setMatrix[i] = new Object[length];
+			setMatrix[i] = new ComponentSet[length];
+			for(int j = 0; j < length; j++) {
+				setMatrix[i][j] = new ComponentSet();
+			}
 		}
 	}
-	
-	//private void populateMatrix
-	
-	public void setFromAttributes(byte[] attributes, G e){
+
+	public ComponentSet getFromAttributes(byte[] attributes){
 		int i = attributes.length - 1;
 		int j = 0;
 		for (int k = 0; k < attributes.length; k++) {
 			j += choose((int)(sets-attributes[k]), k+1);
 		}
-		setMatrix[i][j] = e;
+		return setMatrix[i][j];
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Object getFromAttributes(byte[] attributes){
-		int i = attributes.length - 1;
-		int j = 0;
-		for (int k = 0; k < attributes.length; k++) {
-			j += choose((int)(sets-attributes[k]), k+1);
-		}
-		return (G) setMatrix[i][j];
-	}
 	
 	public int getSize(){
 		return this.sets;
@@ -72,6 +64,16 @@ public class MatrixDiagram<G> {
 		}
 		int choose = factorial(s) / (factorial(s - k) * factorial(k));
 		return choose;
+	}
+	
+	public ComponentList toList() {
+		ComponentList list = new ComponentList();
+		for(int i = 0; i < setMatrix.length; i++) {
+			for(int j = 0; j < setMatrix[i].length; j++) {
+				list.append(setMatrix[i][j].toList());
+			}
+		}
+		return list;
 	}
 	
 }

@@ -32,7 +32,7 @@ public class ArrayDiagram {
 	public void genDiagram(ComponentList list) {
 		ComponentListNode next = list.getFirst();
 			while(next!=null) {
-				addComponent(next.getComponenet());
+				addComponent(next.getComponent());
 				next = next.getNext();
 			}
 	}
