@@ -6,7 +6,7 @@ public class Component implements Comparable<Component>{
 	
 	public Component(String name, byte[] attributes) {
 		componentName = name;
-		this.attributes = attributes;
+		setAttributes(attributes);
 	}
 	
 	public String getName(){
@@ -17,7 +17,7 @@ public class Component implements Comparable<Component>{
 		return attributes;
 	}
 	
-	public void setAttributes(byte[] attr) {//need way to sort attribute list
+	private void setAttributes(byte[] attr) {//need way to sort attribute list
 		this.attributes = attr;
 	}
 	
