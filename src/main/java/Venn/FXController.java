@@ -22,6 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
+import javafx.stage.StageStyle;
 
 public class FXController {
 
@@ -84,7 +85,6 @@ public class FXController {
 					System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
 				}
 
-					
 			}
 		});
 
@@ -96,9 +96,11 @@ public class FXController {
 			public void handle(ActionEvent event) {
 				
 				Alert dialog = new Alert(AlertType.CONFIRMATION);		
-				dialog.setTitle("Confirm Delete : " + selectedLabel.getText());
-				dialog.setHeaderText("Are you sure you want to delete this element?");
+				dialog.setTitle("Delete : " + selectedLabel.getText());
+				dialog.setContentText("Are you sure you want to delete this element?");
+				dialog.setHeaderText(null);
 				dialog.setGraphic(null);
+				dialog.getDialogPane().setMaxSize(100, 100);
 				Optional<ButtonType> result = dialog.showAndWait();
 				//checks if you clicked ok or cancel
 				if (result.get() == ButtonType.OK)	{	
@@ -120,6 +122,8 @@ public class FXController {
 			contextElement.getItems().add(eleItem);
 			
 		}
+		
+		
 	}
 
 	/*
