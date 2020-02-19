@@ -25,12 +25,25 @@ public class ComponentList {
 		
 	}
 	
+	public void append(ComponentList list) {
+		
+		ComponentListNode next = list.first;
+		while(next != null) {
+			this.append(next.getComponent());
+			next = next.getNext();
+		}
+	}
+	
 	public int getLength() {
 		return this.getLength();
 	}
 	
 	public ComponentListNode getFirst() {
 		return this.first;
+	}
+	
+	public ComponentListNode getLast() {
+		return this.last;
 	}
 	
 	public String toString() {
