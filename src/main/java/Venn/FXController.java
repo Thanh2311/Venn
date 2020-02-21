@@ -37,7 +37,7 @@ import javafx.stage.StageStyle;
 public class FXController {
 
 	
-	private final DataFormat labelFormat = new DataFormat("label");
+	private static final DataFormat LABEL_FORMAT = new DataFormat("label");
 	
 	private Font font;
 	@FXML
@@ -69,13 +69,7 @@ public class FXController {
 	@FXML
 	private ContextMenu contextTitle;
 	@FXML
-	private Shape leftCircle;
-	@FXML
-	private Shape intersect;
-	@FXML
-	private Shape rightCircle;
-
-	//private Node selectedLabel;
+	private Shape border;
 
 	private double x;
 	private double y;
@@ -94,20 +88,7 @@ public class FXController {
 //			Opens a window to rename the label right clicked on.
 			@Override
 			public void handle(ActionEvent event) {
-
-				String oldText = selectedLabel.getText();
-				TextInputDialog dialog = new TextInputDialog(oldText);
-				dialog.setTitle("Rename " + oldText);
-				dialog.setHeaderText(null);
-				dialog.setGraphic(null);
-				Optional<String> result = dialog.showAndWait();
-				String newText = dialog.getEditor().getText();
-				// checks if you clicked ok or cancel
-				if (result.isPresent() && !newText.trim().isEmpty()) {
-					selectedLabel.setText(newText);
-					System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
-				}
-
+				rename();
 			}
 		});
 
@@ -116,19 +97,7 @@ public class FXController {
 //			Opens a window to delete the label right clicked on.
 			@Override
 			public void handle(ActionEvent event) {
-
-				Alert dialog = new Alert(AlertType.CONFIRMATION);
-				dialog.setTitle("Delete : " + selectedLabel.getText());
-				dialog.setContentText("Are you sure you want to delete this element?");
-				dialog.setHeaderText(null);
-				dialog.setGraphic(null);
-				dialog.getDialogPane().setMaxSize(100, 100);
-				Optional<ButtonType> result = dialog.showAndWait();
-				// checks if you clicked ok or cancel
-				if (result.get() == ButtonType.OK) {
-					System.out.printf("\"%s\" deleted\n", selectedLabel.getText());
-					((Pane) selectedLabel.getParent()).getChildren().remove(selectedLabel);
-				}
+				delete();
 
 			}
 		});
@@ -161,8 +130,6 @@ public class FXController {
 			element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
 			element.setOnDragDetected(placeholder.getOnDragDetected());
 			element.setOnDragDone(placeholder.getOnDragDone());
-		//	element.setOnDragDetected(plac);
-			//element.toFront();
 			selectedPane.getChildren().add(element);
 			selectedElement = element;
 			System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
@@ -243,7 +210,7 @@ public class FXController {
 		Dragboard db = selectedLabel.startDragAndDrop(TransferMode.MOVE) ;
 		db.setDragView(selectedLabel.snapshot(null, null));
 		ClipboardContent clip = new ClipboardContent();
-		clip.put(labelFormat, "label");
+		clip.put(LABEL_FORMAT, "label");
 		db.setContent(clip);
 
 		
@@ -254,8 +221,13 @@ public class FXController {
 	public void setOnDragOver(DragEvent event) {
 		Dragboard db = event.getDragboard();
 		selectedShape = ((Shape)((Pane)event.getSource()).getChildren().get(0));
-		selectedShape.setStrokeWidth(4);
-		if (db.hasContent(labelFormat) 
+		if (selectedShape == border) {
+			selectedShape.setOpacity(.64);
+			selectedShape.setStrokeWidth(20);
+		}
+		else
+			selectedShape.setStrokeWidth(4);
+		if (db.hasContent(LABEL_FORMAT) 
 				&& selectedLabel != null 
                 && selectedLabel.getParent() != event.getSource()) {
             event.acceptTransferModes(TransferMode.MOVE);
@@ -265,21 +237,29 @@ public class FXController {
 	
 	@FXML
 	public void setOnDragExited(DragEvent event) {
+		if (selectedShape == border)
+			selectedShape.setOpacity(0);
 		selectedShape.setStrokeWidth(1);
 	}
 	
 	@FXML
 	public void setOnDragDropped(DragEvent event) {
 		Dragboard db = event.getDragboard();
-		if (db.hasContent(labelFormat) && selectedLabel.getParent().getParent() != event.getSource()) {
-            ((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
-            ((Pane)((Pane)event.getSource()).getChildren().get(1)).getChildren().add(selectedLabel);
-         //   System.out.println(selectedLabel + " transfered from ");
-            event.setDropCompleted(true);  
-		}
-		else
+		
+		if (selectedShape == border) 
+			delete();
+		else if (db.hasContent(LABEL_FORMAT) && selectedLabel.getParent().getParent() != event.getSource()) {
+			((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
+			((Pane)((Pane)event.getSource()).getChildren().get(1)).getChildren().add(selectedLabel);
+			//System.out.println(selectedLabel + " transfered from ");
+			event.setDropCompleted(true);  
+			selectedLabel.setLayoutX(0);
+			selectedLabel.setLayoutY(event.getSceneY() + y); 
+			}
+		else {
 			selectedLabel.setLayoutX(event.getSceneX() + x);
-		selectedLabel.setLayoutY(event.getSceneY() + y); 
+			selectedLabel.setLayoutY(event.getSceneY() + y); 
+		}
 		
 	}
 	
@@ -287,53 +267,43 @@ public class FXController {
 	@FXML 
 	public void dragDone(DragEvent event) {
 	 // if(!event.isPrimaryButtonDown()) selectedLabel = (Label) event.getSource();
-		  selectedLabel.setOpacity(1);
-		  selectedLabel.setCursor(Cursor.HAND); 
+		border.setOpacity(0);
+		selectedLabel.setOpacity(1);
+		selectedLabel.setCursor(Cursor.HAND); 
 	  }
 	  
 
-	
-	@FXML 
-	public void dragStarted(MouseEvent event) {
-		  
-		  selectedLabel = (Label) event.getSource();
-		  x = selectedLabel.getLayoutX() - event.getSceneX(); 
-		  y = selectedLabel.getLayoutY() - event.getSceneY(); 
-	//	  event.consume();// node.startFullDrag();
-		  selectedLabel.setOpacity(.5);
-		  selectedLabel.setCursor(Cursor.MOVE); 
-	  
-	  }
-	  
-	  
-	@FXML public void dragReleased(MouseEvent event) {
-	 // node.setMouseTransparent(false); 
-		  System.out.println("test drop"); 
-		  Node tar =(Node) event.getSource(); // node.setMouseTransparent(true);
-	  this.selectedLabel.setMouseTransparent(false); 
-	  selectedLabel.setLayoutX(event.getX() + x);
-	  selectedLabel.setLayoutY(event.getY() + y); 
-	  selectedLabel.setOpacity(1); // event.
-	  tar.setCursor(Cursor.DISAPPEAR);
-	  
-	  
-	  
-	  
-	  }
-	  
-	  
-	  
 
-	 
+	public void delete() {
+		
+		Alert dialog = new Alert(AlertType.CONFIRMATION);
+		dialog.setTitle("Delete : " + selectedLabel.getText());
+		dialog.setContentText("Are you sure you want to delete this element?");
+		dialog.setHeaderText(null);
+		dialog.setGraphic(null);
+		dialog.getDialogPane().setMaxSize(100, 100);
+		Optional<ButtonType> result = dialog.showAndWait();
+		// checks if you clicked ok or cancel
+		if (result.get() == ButtonType.OK) {
+			System.out.printf("\"%s\" deleted\n", selectedLabel.getText());
+			((Pane) selectedLabel.getParent()).getChildren().remove(selectedLabel);
+		}
+	}
 
-	// Depreciated
-	@FXML
-	public void rename(ActionEvent event) {
 
-		if (selectedElement != null) {
-			String oldLabel = selectedElement.getText();
-			selectedElement.setText(textbox.getText());
-			System.out.println("\"" + oldLabel + "\" renamed to \"" + selectedElement.getText() + "\".");
+	public void rename() {
+
+		String oldText = selectedLabel.getText();
+		TextInputDialog dialog = new TextInputDialog(oldText);
+		dialog.setTitle("Rename " + oldText);
+		dialog.setHeaderText(null);
+		dialog.setGraphic(null);
+		Optional<String> result = dialog.showAndWait();
+		String newText = dialog.getEditor().getText();
+		// checks if you clicked ok or cancel
+		if (result.isPresent() && !newText.trim().isEmpty()) {
+			selectedLabel.setText(newText);
+			System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
 		}
 
 	}

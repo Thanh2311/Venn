@@ -22,9 +22,9 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
    <children>
-      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#deselectAll" opacity="0.0" pickOnBounds="false">
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onDragDone="#dragDone" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#deselectAll" pickOnBounds="false">
          <children>
-            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#dddddd69" height="600.0" stroke="#00000073" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="800.0" />
+            <Rectangle fx:id="border" arcHeight="2.0" arcWidth="2.0" fill="#dddddd69" height="600.0" opacity="0.0" stroke="#ff0000c2" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="20.0" width="800.0" />
          </children>
       </Pane>
       <BorderPane pickOnBounds="false" prefHeight="600.0" prefWidth="800.0">
@@ -40,7 +40,7 @@
                         </Label>
                         <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="300.0" prefWidth="150.0">
                            <children>
-                              <Circle fx:id="leftCircle" blendMode="DARKEN" fill="#e35d5d66" radius="150.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                              <Circle blendMode="DARKEN" fill="#e35d5d66" radius="150.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="selectedTitle" contentDisplay="CENTER" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" text="tester">
@@ -63,7 +63,7 @@
                         </Label>
                         <StackPane alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="300.0" prefWidth="150.0">
                            <children>
-                              <Circle fx:id="rightCircle" blendMode="DARKEN" fill="#2197ff66" radius="150.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle blendMode="DARKEN" fill="#2197ff66" radius="150.0" stroke="BLACK" strokeType="INSIDE" />
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
                            </children>
                         </StackPane>
@@ -71,14 +71,14 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Label fx:id="placeholder" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" onMousePressed="#dragStarted" onMouseReleased="#dragReleased" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
+                        <Label fx:id="placeholder" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" onMouseEntered="#selectSet" pickOnBounds="false" prefHeight="300.0" prefWidth="150.0">
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="300.0" prefWidth="150.0">
                            <children>
-                              <Path fx:id="intersect" blendMode="DARKEN" fill="#1f93ff21" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_RIGHT">
+                              <Path blendMode="DARKEN" fill="#1f93ff21" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_RIGHT">
                                   <elements>
                                     <MoveTo />
                                     <ArcTo XAxisRotation="140.5" radiusX="150.0" radiusY="150.0" y="259.8" />
