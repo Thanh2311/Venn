@@ -1,11 +1,13 @@
 Venn
-Esra Kastrati   - 215507205
-Mahamed Hassan  - 216536476
-Derui Liu       - 215608946
-Thanh Nguyen    - 213507231
+<ul>
+<li>Esra Kastrati   - 215507205</li>
+<li>Mahamed Hassan  - 216536476</li>
+<li>Derui Liu       - 215608946</li>
+<li>Thanh Nguyen    - 213507231</li>
+        </ul>
 <p>
 
-Venn Diagram Application 
+<h2>Venn Diagram Application </h2>
         
  The objective of this activity is for the students to create a visual explanation of the expectations and norms in regards to specific types of work. This Application is work for a course project in EECS2311. 
  
