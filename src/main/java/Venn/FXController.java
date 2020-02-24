@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
@@ -21,6 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
+import javafx.stage.StageStyle;
 
 public class FXController {
 
@@ -30,9 +32,11 @@ public class FXController {
 	@FXML
 	private Label rightLabel;
 	@FXML
-	private Label placeholder;
+	private Label placeholder;	//Placeholder only required for element context menus
 	@FXML
 	private TextField textbox;
+	@FXML
+	private Button addButton;
 	@FXML
 	private Pane newLabelPaneLeft;
 	@FXML
@@ -46,7 +50,7 @@ public class FXController {
 	@FXML
 	private Label selectedElement;
 	@FXML
-	private Label selectedLabel;
+	private Label selectedLabel;	//Use only this field to refer to selected label
 	@FXML
 	private ContextMenu contextElement;
 	@FXML
@@ -81,7 +85,6 @@ public class FXController {
 					System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
 				}
 
-					
 			}
 		});
 
@@ -93,9 +96,11 @@ public class FXController {
 			public void handle(ActionEvent event) {
 				
 				Alert dialog = new Alert(AlertType.CONFIRMATION);		
-				dialog.setTitle("Confirm Delete : " + selectedLabel.getText());
-				dialog.setHeaderText("Are you sure you want to delete this element?");
+				dialog.setTitle("Delete : " + selectedLabel.getText());
+				dialog.setContentText("Are you sure you want to delete this element?");
+				dialog.setHeaderText(null);
 				dialog.setGraphic(null);
+				dialog.getDialogPane().setMaxSize(100, 100);
 				Optional<ButtonType> result = dialog.showAndWait();
 				//checks if you clicked ok or cancel
 				if (result.get() == ButtonType.OK)	{	
@@ -117,6 +122,8 @@ public class FXController {
 			contextElement.getItems().add(eleItem);
 			
 		}
+		
+		
 	}
 
 	/*
@@ -149,7 +156,9 @@ public class FXController {
 	public void selectSet(MouseEvent event) {
 		
 		if(event.getButton() == MouseButton.PRIMARY) {
-		
+			
+			addButton.setDisable(false);
+			textbox.requestFocus();
 			Pane x = (Pane) event.getSource();
 	
 			if (selectedShape != null) {
@@ -159,16 +168,15 @@ public class FXController {
 			selectedShape.setStrokeWidth(4);
 	
 			selectedPane = (VBox) x.getChildren().get(1);
-			
-			selectedTitle = ((Label)((Pane)((Pane)event.getSource()).getParent()).getChildren().get(0));
+			selectedTitle = ((Label)((Pane)(x).getParent()).getChildren().get(0));
 	
-			System.out.println(((Label)((VBox) x.getParent()).getChildren().get(0)).getText() + " selected");
-			//System.out.println(selectedLabel.getText() + " Selected");
+			System.out.println(selectedTitle.getText() + " selected");
+
 		}
 	}
 
 	
-	/* Opens a context menu on the requested label */
+	/* Opens a context menu on the requested element */
 	@FXML
 	public void contextOnElement(ContextMenuEvent event) {
 
@@ -196,6 +204,7 @@ public class FXController {
 	public void deselect(MouseEvent event) {
 
 		if (selectedShape != null) {
+			addButton.setDisable(true);
 			selectedShape.setStrokeWidth(1);
 			selectedShape.requestFocus();
 		}

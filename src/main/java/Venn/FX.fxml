@@ -54,7 +54,7 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" StackPane.alignment="CENTER_RIGHT">
                      <children>
-                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnTitle" text="Right Set" textAlignment="RIGHT">
+                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnTitle" text="Right Set">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -76,7 +76,7 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Label fx:id="placeholder" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnElement" pickOnBounds="false" text="Middle" visible="false">
+                        <Label fx:id="placeholder" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnElement" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -111,12 +111,12 @@
                <children>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
+                        <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
                         <Button disable="true" mnemonicParsing="false" onAction="#rename" text="Rename" />
                         <Button disable="true" mnemonicParsing="false" text="Delete" />
                      </children>
                   </HBox>
-                  <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addEleButton" promptText="Enter name here">
+                  <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Enter name here">
                      <contextMenu>
                         <ContextMenu>
                           <items>
