@@ -13,7 +13,7 @@ Venn
  
  In this vM folder you will find all the code that was used to build this Application.
  
- There are three files in the 'Documents' folder included. "User Manual" (Describes how to install the system on the client’s site), "Requirment Document" (Describes what the system does for its client) and "Testing Document" (Describes the test cases that have been implemented). <p>
+ There are three files in the 'Documentation' folder included. "User Manual" (Describes how to install the system on the client’s site), "Requirment Document" (Describes what the system does for its client) and "Testing Document" (Describes the test cases that have been implemented). <p>
          
    To run the program, double click the .JAR file  If that doesn't work, open a terminal in the
 same directory of the .JAR file. Then enter “java -jar venn.jar” or the current name of the
