@@ -27,6 +27,7 @@ public class JavaFXMain extends Application {
 			primaryStage.setTitle("Venn Diagram Example");
 			primaryStage.setMinHeight(720);
 			primaryStage.setMinWidth(1200);
+			
 			// primaryStage.setResizable(false);
 			//primaryStage.sizeToScene();
 			//primaryStage.initStyle(StageStyle.UNIFIED);

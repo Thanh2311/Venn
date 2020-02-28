@@ -31,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -71,7 +72,9 @@ public class FXController {
 	@FXML
 	private ContextMenu contextTitle;
 	@FXML
-	private Shape border;
+	private Rectangle border;
+	@FXML
+	private AnchorPane root;
 
 	private double x;
 	private double y;
@@ -115,6 +118,10 @@ public class FXController {
 			contextElement.getItems().add(eleItem);
 
 		}
+		
+		border.widthProperty().bind(root.widthProperty());
+		border.heightProperty().bind(root.heightProperty());	// resizes the red border when dragging outside the circle
+		
 
 	}
 
