@@ -97,9 +97,9 @@
                   </HBox>
                   <StackPane>
                      <children>
-                        <ScrollPane focusTraversable="false" hbarPolicy="NEVER" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                        <ScrollPane focusTraversable="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="selectedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+                              <VBox fx:id="selectedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
                                  <padding>
                                     <Insets left="3.0" />
                                  </padding>

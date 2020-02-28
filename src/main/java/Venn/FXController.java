@@ -100,6 +100,7 @@ public class FXController {
 	private void initialize() {
 
 		font = new Font("System Regular", 14);
+		textColor = Color.BLACK;
 
 		MenuItem rename = new MenuItem("Rename");
 		MenuItem delete = new MenuItem("Delete");
@@ -313,7 +314,13 @@ public class FXController {
 	
 	@FXML 
 	public void updateFont(ActionEvent event) {
-		font = Font.font(fontBox.getValue(), Double.parseDouble(((String) fontSizeBox.getValue())) );
+		
+		String size = fontSizeBox.getValue(); 
+		if (size == null || size.isEmpty() || !size.matches("[0-9][0-9]")) 
+			fontSizeBox.setValue(Integer.toString((int)font.getSize()));
+		
+		else
+			font = Font.font(fontBox.getValue(), Double.parseDouble(size));
 	}
 	
 	
