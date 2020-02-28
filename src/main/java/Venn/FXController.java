@@ -15,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -32,6 +33,7 @@ import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
 
 public class FXController {
@@ -104,7 +106,7 @@ public class FXController {
 
 		contextTitle = new ContextMenu(rename, custom);
 		contextElement = new ContextMenu(delete);
-
+		
 		// duplicates MenuItems because they are associated with only one ContextMenu
 		for (MenuItem titleItem : contextTitle.getItems()) {
 			MenuItem eleItem = new MenuItem(titleItem.getText());
@@ -122,7 +124,7 @@ public class FXController {
 	@FXML
 	public void addEleButton(ActionEvent event) {
 
-		selectedPane = (selectedPane == null) ? newLabelPaneLeft : selectedPane;
+		//selectedPane = (selectedPane == null) ? newLabelPaneLeft : selectedPane;
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
 			Label element = new Label(textbox.getText());
 			element.setFont(font);
@@ -131,8 +133,9 @@ public class FXController {
 			element.setOnDragDetected(placeholder.getOnDragDetected());
 			element.setOnDragDone(placeholder.getOnDragDone());
 			selectedPane.getChildren().add(element);
+			
 			selectedElement = element;
-			System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
+		//	System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
 		}
 		textbox.setText("");
 		textbox.requestFocus();
@@ -156,7 +159,7 @@ public class FXController {
 			selectedShape = (Shape) x.getChildren().get(0);
 			selectedShape.setStrokeWidth(4);
 
-			selectedPane = (Pane) x.getChildren().get(1);
+			//selectedPane = (Pane) x.getChildren().get(1);
 			selectedTitle = ((Label) ((Pane) (x).getParent()).getChildren().get(0));
 
 			System.out.println(selectedTitle.getText() + " selected");
@@ -190,7 +193,7 @@ public class FXController {
 	public void deselectAll(MouseEvent event) {
 
 		if (selectedShape != null) {
-			addButton.setDisable(true);
+		//	addButton.setDisable(true);
 			selectedShape.setStrokeWidth(1);
 			selectedShape.requestFocus();
 		}
