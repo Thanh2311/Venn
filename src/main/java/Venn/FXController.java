@@ -2,6 +2,8 @@ package Venn;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.sun.javafx.collections.ObservableListWrapper;
@@ -21,6 +23,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -42,6 +46,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
 
@@ -60,6 +66,8 @@ public class FXController {
 	private ComboBox<String> fontSizeBox;
 	@FXML
 	private ColorPicker colorBox;
+	@FXML
+	private VBox customizeBox;
 	@FXML
 	private Label leftLabel;
 	@FXML
@@ -99,8 +107,10 @@ public class FXController {
 	@FXML
 	private void initialize() {
 
-		font = new Font("System Regular", 14);
+	
+		font = Font.getDefault();	//initializes font and color
 		textColor = Color.BLACK;
+		//Font.
 
 		MenuItem rename = new MenuItem("Rename");
 		MenuItem delete = new MenuItem("Delete");
@@ -124,6 +134,16 @@ public class FXController {
 
 			}
 		});
+		
+		custom.setOnAction(new EventHandler<ActionEvent>() {
+			
+//			Opens a window to delete the label right clicked on.
+			@Override
+			public void handle(ActionEvent event) {
+				customize();
+				
+			}
+		});
 
 		contextTitle = new ContextMenu(rename, custom);
 		contextElement = new ContextMenu(delete);
@@ -141,26 +161,31 @@ public class FXController {
 		border.heightProperty().bind(root.heightProperty());	// resizes the red border when dragging outside the circle
 		
 		fontBox.getItems().addAll(Font.getFontNames());			// populates font box
-		fontBox.setValue(font.getName());
+		fontBox.setValue(font.getFamily());
 		
-		ArrayList<String> list = new ArrayList<>();		// populates font size box 
+		List<String> list = new ArrayList<>();		 
 		for (int i = 8; i <= 24; i += 2) {
 			list.add(String.valueOf(i) );
 		}
-		fontSizeBox.getItems().addAll(list);
-		fontSizeBox.setValue(Integer.toString((int)font.getSize()));
+		fontSizeBox.getItems().addAll(list);					// populates font size box
+		fontSizeBox.setValue(Integer.toString((int)font.getSize()));	//Done this way to remove trailing point and decimal point	
 		
 		colorBox.setValue(Color.BLACK);
+
 		
 	}
 
+	
+	
+	
+	
+	
 	/*
 	 * Adds a new Label to the selected Set's VBox, default Left
 	 */
 	@FXML
 	public void addEleButton(ActionEvent event) {
 
-		//selectedPane = (selectedPane == null) ? newLabelPaneLeft : selectedPane;
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
 			Label element = new Label(textbox.getText());
 			element.setFont(font);
@@ -316,11 +341,14 @@ public class FXController {
 	public void updateFont(ActionEvent event) {
 		
 		String size = fontSizeBox.getValue(); 
-		if (size == null || size.isEmpty() || !size.matches("[0-9][0-9]")) 
+		if (size == null || size.isEmpty() || !size.matches("[0-9]+")) 
 			fontSizeBox.setValue(Integer.toString((int)font.getSize()));
-		
+		else if (Integer.parseInt(size) > 100)
+			fontSizeBox.setValue("99");
+		else if (Integer.parseInt(size) <= 0)
+			fontSizeBox.setValue("1");
 		else
-			font = Font.font(fontBox.getValue(), Double.parseDouble(size));
+			font = new Font(fontBox.getValue(),Double.parseDouble(size));
 	}
 	
 	
@@ -369,6 +397,53 @@ public class FXController {
 			System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
 		}
 
+	}
+	
+	
+	public void customize() {
+		
+		Alert dialog = new Alert(AlertType.CONFIRMATION);
+		
+		DialogPane dpane = dialog.getDialogPane();
+		ColorPicker color = new ColorPicker();
+		color.setValue((Color) selectedLabel.getTextFill());
+		HBox hb = new HBox();
+		ComboBox<String> font = new ComboBox<>();
+		font.setMaxWidth(140);
+		font.getItems().addAll(Font.getFontNames());
+		font.setValue(selectedLabel.getFont().getName());
+		ComboBox<String> sizebox = new ComboBox<>();
+		sizebox.setEditable(true);
+		sizebox.setMaxWidth(60);
+		sizebox.getItems().addAll(fontSizeBox.getItems());
+		sizebox.setValue(Integer.toString((int)selectedLabel.getFont().getSize()));
+		
+		hb.getChildren().addAll(font,sizebox);
+		hb.resizeRelocate(0, 25, 200, 25);
+		color.resize(200, 25);
+		dpane.getChildren().addAll(color);
+		dpane.getChildren().addAll(hb);
+		dpane.setMaxSize(1, 600);
+		dpane.setMinHeight(100);
+		dialog.setTitle("Customize");
+		dialog.setHeaderText("");
+		dialog.setGraphic(null);
+		Optional<ButtonType> result = dialog.showAndWait();
+		// checks if you clicked ok or cancel
+		if (result.get() == ButtonType.OK) {
+			String size = sizebox.getValue(); 
+			if (size == null || size.isEmpty() || !size.matches("[0-9]+")) 
+				sizebox.setValue(Integer.toString((int)selectedLabel.getFont().getSize()));
+			else if (Integer.parseInt(size) > 100)
+				sizebox.setValue("99");
+			else if (Integer.parseInt(size) <= 0)
+				sizebox.setValue("1");
+			else
+				selectedLabel.setFont(new Font(font.getValue(), Double.parseDouble(sizebox.getValue())));
+			selectedLabel.setTextFill(color.getValue());
+			System.out.println(font.getValue());
+		}
+		
 	}
 
 }
