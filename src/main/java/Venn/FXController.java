@@ -1,7 +1,12 @@
 package Venn;
 
+
+import java.util.ArrayList;
 import java.util.Optional;
 
+import com.sun.javafx.collections.ObservableListWrapper;
+
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +18,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -31,6 +38,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
@@ -42,7 +50,16 @@ public class FXController {
 	
 	private static final DataFormat LABEL_FORMAT = new DataFormat("label");
 	
+	@FXML
 	private Font font;
+	@FXML
+	private Color textColor;
+	@FXML
+	private ComboBox<String> fontBox;
+	@FXML
+	private ComboBox<String> fontSizeBox;
+	@FXML
+	private ColorPicker colorBox;
 	@FXML
 	private Label leftLabel;
 	@FXML
@@ -122,7 +139,18 @@ public class FXController {
 		border.widthProperty().bind(root.widthProperty());
 		border.heightProperty().bind(root.heightProperty());	// resizes the red border when dragging outside the circle
 		
-
+		fontBox.getItems().addAll(Font.getFontNames());			// populates font box
+		fontBox.setValue(font.getName());
+		
+		ArrayList<String> list = new ArrayList<>();		// populates font size box 
+		for (int i = 8; i <= 24; i += 2) {
+			list.add(String.valueOf(i) );
+		}
+		fontSizeBox.getItems().addAll(list);
+		fontSizeBox.setValue(Integer.toString((int)font.getSize()));
+		
+		colorBox.setValue(Color.BLACK);
+		
 	}
 
 	/*
@@ -135,6 +163,7 @@ public class FXController {
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
 			Label element = new Label(textbox.getText());
 			element.setFont(font);
+			element.setTextFill(textColor);
 			element.setWrapText(true);
 			element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
 			element.setOnDragDetected(placeholder.getOnDragDetected());
@@ -159,7 +188,6 @@ public class FXController {
 
 		if (event.getButton() == MouseButton.PRIMARY || event.isPrimaryButtonDown()) {
 			deselectAll(event);
-			addButton.setDisable(false);
 			textbox.requestFocus();
 			
 			Pane x = (Pane) event.getSource();
@@ -200,7 +228,6 @@ public class FXController {
 	public void deselectAll(MouseEvent event) {
 
 		if (selectedShape != null) {
-		//	addButton.setDisable(true);
 			selectedShape.setStrokeWidth(1);
 			selectedShape.requestFocus();
 		}
@@ -281,6 +308,25 @@ public class FXController {
 		selectedLabel.setOpacity(1);
 		selectedLabel.setCursor(Cursor.HAND); 
 	  }
+	
+	
+	
+	@FXML 
+	public void updateFont(ActionEvent event) {
+		font = Font.font(fontBox.getValue(), Double.parseDouble(((String) fontSizeBox.getValue())) );
+	}
+	
+	
+	@FXML 
+	public void updateColor(ActionEvent event) {
+
+		textColor = colorBox.getValue();
+	}
+	
+	
+
+	
+	
 	  
 
 
