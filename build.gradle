@@ -18,7 +18,7 @@ dependencies {
 
 jar {
 	manifest {
-		attributes 'Main-Class': 'counterci.Main'
+		attributes 'Main-Class': 'venn.JavaFXMain'
 	}
 }
 
