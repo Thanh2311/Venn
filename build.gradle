@@ -9,7 +9,9 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java'
+    id "org.openjfx.javafxplugin" version "0.0.8"
 }
+
 
 dependencies {
     // Use JUnit test framework
