@@ -12,6 +12,11 @@ plugins {
     id "org.openjfx.javafxplugin" version "0.0.8"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_13
+    targetCompatibility = JavaVersion.VERSION_13
+}
+
 javafx {
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.base' ]
 }
@@ -20,6 +25,7 @@ javafx {
 dependencies {
     // Use JUnit test framework
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.0'
+    testImplementation 'junit:junit:4.13'
 }
 
 jar {
