@@ -113,7 +113,7 @@
                         </Rectangle>
                      </children>
                   </StackPane>
-                  <VBox fx:id="customizeBox">
+                  <VBox fx:id="customizeBox" spacing="10.0">
                      <children>
                         <ColorPicker fx:id="colorBox" onAction="#updateColor" prefHeight="25.0" prefWidth="200.0" />
                         <HBox>
