@@ -400,7 +400,7 @@ public class FXController {
 	}
 	
 	
-	public void customize() {
+	public void customize() {	// Structured poorly, mostly just recreating colorBox,fontBox, and fontSizeBox for use in contextmenu
 		
 		Alert dialog = new Alert(AlertType.CONFIRMATION);
 		
