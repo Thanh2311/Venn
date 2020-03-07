@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 
-public class JavaFXMain extends Application {
+public class ApplicationWindow extends Application {
 
 //	public static void main(String[] args) {
 //		launch(args);
