@@ -2,31 +2,22 @@ package Venn;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.sun.javafx.collections.ObservableListWrapper;
-
-import javafx.beans.value.ObservableIntegerValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.SnapshotResult;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -35,9 +26,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.KeyCharacterCombination;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
@@ -46,10 +35,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.StageStyle;
 
 public class FXController {
 
@@ -110,7 +95,6 @@ public class FXController {
 	
 		font = Font.getDefault();	//initializes font and color
 		textColor = Color.BLACK;
-		//Font.
 
 		MenuItem rename = new MenuItem("Rename");
 		MenuItem delete = new MenuItem("Delete");

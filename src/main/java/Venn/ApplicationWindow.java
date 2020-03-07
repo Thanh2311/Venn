@@ -5,9 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.geometry.*;
-import javafx.scene.control.*;
 
 public class ApplicationWindow extends Application {
 
