@@ -52,6 +52,8 @@ jobs:
       - run: 
           name: "Build and Publish Release on GitHub"
           command: |
+            curl -sSL https://get.haskellstack.org/
+            stack --resolver nightly install github-release
             NOW="$(date)" 
             ZIP_FILE_NAME=venn
             TAG=Release-$(date '+%Y-%m-%d-%H-%M-%S')
