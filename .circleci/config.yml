@@ -30,7 +30,7 @@ jobs:
       
       - run:
          name: Install zip
-         command: -c sudo apt-get install -y zip
+         command: apt-get install -y zip
 
       # Download and cache dependencies
       - restore_cache:
