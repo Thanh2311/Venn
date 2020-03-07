@@ -7,8 +7,9 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: mjalas/javafx:latest
-      - image: danielmapar/gradle_and_node:2.0
+      - image: niccomlt/gradle-javafx:latest
+
+    #  - image: danielmapar/gradle_and_node:2.0
   
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
