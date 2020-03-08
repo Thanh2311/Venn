@@ -31,24 +31,24 @@
          <center>
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="439.0" prefWidth="200.0" StackPane.alignment="CENTER_LEFT">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnTitle" text="Left Set">
+                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" layoutY="-25.0" onContextMenuRequested="#contextOnTitle" text="Left Set">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefWidth="250.0">
+                        <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0">
                            <children>
                               <Circle blendMode="DARKEN" fill="#e35d5d66" radius="250.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
                            </children>
                         </StackPane>
                      </children>
-                  </VBox>
-                  <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" StackPane.alignment="CENTER_RIGHT">
+                  </Pane>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_RIGHT">
                      <children>
-                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnTitle" text="Right Set">
+                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="150.0" layoutY="-25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextOnTitle" text="Right Set" textAlignment="RIGHT">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -60,15 +60,15 @@
                            </children>
                         </StackPane>
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" StackPane.alignment="CENTER">
+                  </Pane>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="placeholder" alignment="TOP_RIGHT" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" opacity="0.0" pickOnBounds="false" text="Middle" visible="false">
+                        <Label fx:id="placeholder" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" opacity="0.0" pickOnBounds="false" prefHeight="0.0" prefWidth="0.0" text="Middle" visible="false">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefWidth="200.0">
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="200.0">
                            <children>
                               <Path blendMode="SRC_ATOP" fill="#2197ff00" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER">
                                   <elements>
