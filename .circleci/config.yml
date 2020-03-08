@@ -10,7 +10,7 @@ jobs:
 
       - image: niccomlt/gradle-javafx:latest
 
-    #  - image: danielmapar/gradle_and_node:2.0
+      - image: danielmapar/gradle_and_node:2.0
 
   
       # Specify service dependencies here if necessary
@@ -52,8 +52,7 @@ jobs:
       - run: 
           name: "Build and Publish Release on GitHub"
           command: |
-            curl -sSL https://get.haskellstack.org/
-            stack --resolver nightly install github-release
+
             NOW="$(date)" 
             ZIP_FILE_NAME=venn
             TAG=Release-$(date '+%Y-%m-%d-%H-%M-%S')
