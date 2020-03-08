@@ -52,7 +52,7 @@ jobs:
       - run: 
           name: "Build and Publish Release on GitHub"
           command: |
-
+            npm install -g github-release-cli
             NOW="$(date)" 
             ZIP_FILE_NAME=venn
             TAG=Release-$(date '+%Y-%m-%d-%H-%M-%S')
