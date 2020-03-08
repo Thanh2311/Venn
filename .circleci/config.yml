@@ -29,8 +29,14 @@ jobs:
       - checkout
       
       - run:
-         name: Install zip
-         command: apt-get install -y zip
+         name: Install zip, npm, and github-release
+         command: |
+            apt-get install -y zip
+            curl -sL https://deb.nodesource.com/setup_10.x > install.sh
+            chmod +x install.sh    
+            ./install.sh 
+            apt-get install -y nodejs
+            npm install -g github-release-cli
 
       # Download and cache dependencies
       - restore_cache:
@@ -52,11 +58,6 @@ jobs:
       - run: 
           name: "Build and Publish Release on GitHub"
           command: |
-            curl -sL https://deb.nodesource.com/setup_10.x > install.sh
-            chmod +x install.sh    
-            ./install.sh 
-            apt-get install -y nodejs
-            npm install -g github-release-cli
             NOW="$(date)" 
             ZIP_FILE_NAME=venn
             TAG=Release-$(date '+%Y-%m-%d-%H-%M-%S')

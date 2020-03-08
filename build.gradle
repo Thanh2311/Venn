@@ -32,8 +32,17 @@ dependencies {
 
 jar {
 	manifest {
-		attributes 'Main-Class': 'venn.ApplicationMain'
+		attributes 'Main-Class': 'Venn.ApplicationMain'
 	}
+}
+
+sourceSets {
+  main {
+    resources {
+        srcDirs = ["src/main/java"]
+        includes = ["**/*.fxml"]
+    }
+  }
 }
 
 test {
