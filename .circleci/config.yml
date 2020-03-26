@@ -8,10 +8,9 @@ jobs:
     docker:
       # specify the version you desire here
 
-      - image: niccomlt/gradle-javafx:latest
-
-      - image: danielmapar/gradle_and_node:2.0
-
+ #     - image: niccomlt/gradle-javafx:latest
+ #    - image: danielmapar/gradle_and_node:2.0
+      - image: eecs2311/j8-gradle-node:latest
   
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -28,15 +27,15 @@ jobs:
     steps:
       - checkout
       
-      - run:
-         name: Install zip, npm, and github-release
-         command: |
-            apt-get install -y zip
-            curl -sL https://deb.nodesource.com/setup_10.x > install.sh
-            chmod +x install.sh    
-            ./install.sh 
-            apt-get install -y nodejs
-            npm install -g github-release-cli
+#       - run:
+#          name: Install zip, npm, and github-release
+#          command: |
+#             apt-get install -y zip
+#             curl -sL https://deb.nodesource.com/setup_10.x > install.sh
+#             chmod +x install.sh    
+#             ./install.sh 
+#             apt-get install -y nodejs
+#             npm install -g github-release-cli
 
       # Download and cache dependencies
       - restore_cache:
@@ -45,7 +44,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: cd . && gradle dependencies
+      - run: gradle dependencies
 
       - save_cache:
           paths:
@@ -53,7 +52,7 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: cd . && gradle test
+      - run: gradle test
 
       - run: 
           name: "Build and Publish Release on GitHub"
@@ -61,7 +60,6 @@ jobs:
             NOW="$(date)" 
             ZIP_FILE_NAME=venn
             TAG=Release-$(date '+%Y-%m-%d-%H-%M-%S')
-            cd .
             gradle jar
             cd ./build/libs/
             zip ${ZIP_FILE_NAME}.zip Venn.jar 

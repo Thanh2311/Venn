@@ -31,7 +31,7 @@
          <center>
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_LEFT">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_LEFT">
                      <children>
                         <Label fx:id="leftLabel" alignment="TOP_RIGHT" layoutY="-25.0" onContextMenuRequested="#contextOnTitle" text="Left Set">
                            <font>
@@ -46,7 +46,7 @@
                         </StackPane>
                      </children>
                   </Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_RIGHT">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_RIGHT">
                      <children>
                         <Label fx:id="rightLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="150.0" layoutY="-25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextOnTitle" text="Right Set" textAlignment="RIGHT">
                            <font>
