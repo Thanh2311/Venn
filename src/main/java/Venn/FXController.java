@@ -196,20 +196,20 @@ public class FXController {
 	@FXML
 	public void selectSet(MouseEvent event) {
 
-		if (event.getButton() == MouseButton.PRIMARY || event.isPrimaryButtonDown()) {
-			deselectAll(event);
-			textbox.requestFocus();
-			
-			Pane x = (Pane) event.getSource();
-			selectedShape = (Shape) x.getChildren().get(0);
-			selectedShape.setStrokeWidth(4);
-
-			//selectedPane = (Pane) x.getChildren().get(1);
-			selectedTitle = ((Label) ((Pane) (x).getParent()).getChildren().get(0));
-
-			System.out.println(selectedTitle.getText() + " selected");
-
-		}
+//		if (event.getButton() == MouseButton.PRIMARY || event.isPrimaryButtonDown()) {
+//			deselectAll(event);
+//			textbox.requestFocus();
+//			
+//			Pane x = (Pane) event.getSource();
+//			selectedShape = (Shape) x.getChildren().get(0);
+//			selectedShape.setStrokeWidth(4);
+//
+//			//selectedPane = (Pane) x.getChildren().get(1);
+//			selectedTitle = ((Label) ((Pane) (x).getParent()).getChildren().get(0));
+//
+//			System.out.println(selectedTitle.getText() + " selected");
+//
+//		}
 	}
 
 	/* Opens a context menu on the requested element */
@@ -296,16 +296,21 @@ public class FXController {
 		if (selectedShape == border) 
 			delete();
 		else if (db.hasContent(LABEL_FORMAT) && selectedLabel.getParent().getParent() != event.getSource()) {
-			((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
+		//	((Pane)selectedLabel.getParent()).getChildren().remove(selectedLabel);
 			((Pane)((Pane)event.getSource()).getChildren().get(1)).getChildren().add(selectedLabel);
-			//System.out.println(selectedLabel + " transfered from ");
-			event.setDropCompleted(true);  
-			selectedLabel.setLayoutX(0);
-			selectedLabel.setLayoutY(event.getSceneY() + y); 
-			}
+			//if (!selectedShape.getBoundsInLocal().contains(selectedLabel.getBoundsInLocal())) {
+				//System.out.println(selectedLabel + " transfered from ");
+			//	selectedShape.con
+				event.setDropCompleted(true);  
+				selectedLabel.setLayoutX(0);
+				selectedLabel.setLayoutY(event.getSceneY() + y); 
+				System.out.println("test");
+			//}
+		}
 		else {
 			selectedLabel.setLayoutX(event.getSceneX() + x);
 			selectedLabel.setLayoutY(event.getSceneY() + y); 
+			//selectedLabel.trans
 		}
 		
 	}

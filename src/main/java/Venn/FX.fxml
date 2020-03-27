@@ -20,119 +20,127 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
-   <children>
-      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onDragDone="#dragDone" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#deselectAll" pickOnBounds="false">
+
+<ScrollPane hbarPolicy="NEVER" pickOnBounds="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Venn.FXController">
+   <content>
+      <AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
-            <Rectangle fx:id="border" arcHeight="2.0" arcWidth="2.0" fill="#dddddd69" height="720.0" opacity="0.0" stroke="#ff0000c2" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="20.0" width="1280.0" />
-         </children>
-      </Pane>
-      <BorderPane pickOnBounds="false" prefHeight="720.0" prefWidth="1280.0">
-         <center>
-            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onDragDone="#dragDone" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#deselectAll" pickOnBounds="false">
                <children>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_LEFT">
-                     <children>
-                        <Label fx:id="leftLabel" alignment="TOP_RIGHT" layoutY="-25.0" onContextMenuRequested="#contextOnTitle" text="Left Set">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0">
-                           <children>
-                              <Circle blendMode="DARKEN" fill="#e35d5d66" radius="250.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
-                           </children>
-                        </StackPane>
-                     </children>
-                  </Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_RIGHT">
-                     <children>
-                        <Label fx:id="rightLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="150.0" layoutY="-25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextOnTitle" text="Right Set" textAlignment="RIGHT">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <StackPane alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefWidth="250.0">
-                           <children>
-                              <Circle blendMode="DARKEN" fill="#2197ff66" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
-                           </children>
-                        </StackPane>
-                     </children>
-                  </Pane>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER">
-                     <children>
-                        <Label fx:id="placeholder" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" opacity="0.0" pickOnBounds="false" prefHeight="0.0" prefWidth="0.0" text="Middle" visible="false">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="200.0">
-                           <children>
-                              <Path blendMode="SRC_ATOP" fill="#2197ff00" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER">
-                                  <elements>
-                                    <MoveTo />
-                                    <ArcTo radiusX="250.0" radiusY="250.0" y="433.0" />
-                                    <MoveTo />
-                                      <ArcTo radiusX="250.0" radiusY="250.0" sweepFlag="true" y="433.0" />
-                                  </elements>
-                              </Path>
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
-                           </children>
-                        </StackPane>
-                     </children>
-                  </VBox>
+                  <Rectangle fx:id="border" arcHeight="2.0" arcWidth="2.0" fill="#dddddd69" height="720.0" opacity="0.0" stroke="#ff0000c2" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="20.0" width="1280.0" />
                </children>
-            </StackPane>
-         </center>
-         <left>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="5.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="1.0">
+            </Pane>
+            <BorderPane pickOnBounds="false" prefHeight="720.0" prefWidth="1280.0">
+               <center>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="750.0" pickOnBounds="false" prefHeight="600.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="162.0" promptText="Enter name here" />
-                        <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
-                     </children>
-                  </HBox>
-                  <StackPane>
-                     <children>
-                        <ScrollPane focusTraversable="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <VBox fx:id="selectedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
-                                 <padding>
-                                    <Insets left="3.0" />
-                                 </padding>
-                              </VBox>
-                           </content>
-                        </ScrollPane>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#adadada1" height="200.0" mouseTransparent="true" opacity="0.34" stroke="BLACK" strokeType="INSIDE" width="200.0">
-                           <StackPane.margin>
-                              <Insets left="1.0" />
-                           </StackPane.margin>
-                        </Rectangle>
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="leftLabel" alignment="TOP_RIGHT" layoutY="-25.0" onContextMenuRequested="#contextOnTitle" text="Left Set">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0">
+                                 <children>
+                                    <Circle blendMode="DARKEN" fill="#e35d5d66" radius="250.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </Pane>
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER_RIGHT">
+                           <children>
+                              <Label fx:id="rightLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="150.0" layoutY="-25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextOnTitle" text="Right Set" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <StackPane alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefWidth="250.0">
+                                 <children>
+                                    <Circle blendMode="DARKEN" fill="#2197ff66" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </Pane>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0" StackPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="placeholder" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#contextOnElement" onDragDetected="#setOnDragStarted" onDragDone="#dragDone" opacity="0.0" pickOnBounds="false" prefHeight="0.0" prefWidth="0.0" text="Middle" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="200.0">
+                                 <children>
+                                    <Path blendMode="SRC_ATOP" fill="#2197ff00" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER">
+                                        <elements>
+                                          <MoveTo />
+                                          <ArcTo radiusX="250.0" radiusY="250.0" y="433.0" />
+                                          <MoveTo />
+                                            <ArcTo radiusX="250.0" radiusY="250.0" sweepFlag="true" y="433.0" />
+                                        </elements>
+                                    </Path>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
                      </children>
                   </StackPane>
-                  <VBox fx:id="customizeBox" spacing="10.0">
+               </center>
+               <left>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="3.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ColorPicker fx:id="colorBox" onAction="#updateColor" prefHeight="25.0" prefWidth="200.0" />
-                        <HBox>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="1.0">
                            <children>
-                              <ComboBox fx:id="fontBox" onAction="#updateFont" prefHeight="25.0" prefWidth="143.0" />
-                              <ComboBox fx:id="fontSizeBox" editable="true" onAction="#updateFont" prefHeight="25.0" prefWidth="57.0" />
+                              <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="162.0" promptText="Enter name here" />
+                              <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
                            </children>
                         </HBox>
+                        <StackPane>
+                           <children>
+                              <ScrollPane focusTraversable="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
+                                 <content>
+                                    <VBox fx:id="selectedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#adadada1" height="200.0" mouseTransparent="true" opacity="0.34" stroke="BLACK" strokeType="INSIDE" width="200.0">
+                                 <StackPane.margin>
+                                    <Insets left="1.0" />
+                                 </StackPane.margin>
+                              </Rectangle>
+                           </children>
+                        </StackPane>
+                        <VBox fx:id="customizeBox" spacing="3.0">
+                           <children>
+                              <ColorPicker fx:id="colorBox" onAction="#updateColor" prefHeight="25.0" prefWidth="200.0" />
+                              <HBox>
+                                 <children>
+                                    <ComboBox fx:id="fontBox" onAction="#updateFont" prefHeight="25.0" prefWidth="143.0" />
+                                    <ComboBox fx:id="fontSizeBox" editable="true" onAction="#updateFont" prefHeight="25.0" prefWidth="57.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
+                     <BorderPane.margin>
+                        <Insets left="1.0" />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
                   </VBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets left="1.0" />
-               </BorderPane.margin>
+               </left>
                <padding>
-                  <Insets left="20.0" />
+                  <Insets bottom="50.0" top="50.0" />
                </padding>
-            </VBox>
-         </left>
-      </BorderPane>
-   </children>
-</AnchorPane>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
