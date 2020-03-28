@@ -18,7 +18,7 @@ public class LabelData implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public List<LabelSerializable> elementList;
+	public ArrayList<LabelSerializable> elementList;
 	
 	
 	public LabelData() {
@@ -26,10 +26,10 @@ public class LabelData implements Serializable{
 	}
 	
 	
-	public List<LabelSerializable> getList() {
+	public ArrayList<LabelSerializable> getList() {
 		return elementList;
 	}
-	public void setFiles(List<LabelSerializable> in) {
+	public void setFiles(ArrayList<LabelSerializable> in) {
 		elementList = in;
 	}
 	
@@ -56,7 +56,8 @@ public class LabelData implements Serializable{
 		try {
 			FileInputStream fin= new FileInputStream (fileName);
 			ObjectInputStream ois = new ObjectInputStream(fin);
-			elementList = (ArrayList)ois.readObject();
+			elementList.clear();
+			elementList.addAll((ArrayList)ois.readObject());
 			ois.close();
 		} 
 		catch (ClassNotFoundException e) {

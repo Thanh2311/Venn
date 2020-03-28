@@ -39,7 +39,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 public class FXController {
 
@@ -200,6 +199,7 @@ public class FXController {
 
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
 			addElement(textbox.getText(), selectedPane);
+			elementList.add(new LabelSerializable(selectedElement));
 		//	System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
 		}
 		textbox.setText("");
@@ -233,7 +233,8 @@ public class FXController {
 	    file = chooser.showOpenDialog(null);
 	    if (file != null) {
 	    	labelData.read(file);
-	    	for (LabelSerializable i : labelData.getList()) {
+	    	//elementList = labelData.getList();
+	    	for (LabelSerializable i : elementList) {
 	    		selectedElement = addElement(i.getText(), (Pane) root.lookup("#"+ i.getParent()));
 	    		selectedElement.setFont(new Font(i.getFont(), i.getSize()));
 	    		selectedElement.setLayoutX(i.getX());
@@ -427,7 +428,7 @@ public class FXController {
 		element.setOnDragDone(placeholder.getOnDragDone());
 		pane.getChildren().add(element);
 	
-		elementList.add(new LabelSerializable(element));
+		
 		selectedElement = element;
 		
 		return element;
