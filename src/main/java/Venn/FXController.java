@@ -1,6 +1,7 @@
 package Venn;
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,16 +31,21 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
+import Venn.LabelSeri;
 
 public class FXController {
 
 	
 	private static final DataFormat LABEL_FORMAT = new DataFormat("label");
+	
+	
+	public File file;
+	
+	public List<LabelSeri> elementList;
 	
 	@FXML
 	private Font font;
@@ -63,6 +69,10 @@ public class FXController {
 	private TextField textbox;
 	@FXML
 	private Button addButton;
+	@FXML
+	private Button saveButton;
+	@FXML
+	private Button loadButton;
 	@FXML
 	private Pane newLabelPaneLeft;
 	@FXML
@@ -91,6 +101,10 @@ public class FXController {
 
 	@FXML
 	private void initialize() {
+		
+		file = new File();
+		
+		elementList = file.getFiles();
 
 	
 		font = Font.getDefault();	//initializes font and color
@@ -165,36 +179,69 @@ public class FXController {
 	
 	
 	/*
-	 * Adds a new Label to the selected Set's VBox, default Left
+	 * Adds a new Label to the left box
 	 */
 	@FXML
 	public void addEleButton(ActionEvent event) {
 
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
-			Label element = new Label(textbox.getText());
-			element.setFont(font);
-			element.setTextFill(textColor);
-			element.setWrapText(true);
-			element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
-			element.setOnDragDetected(placeholder.getOnDragDetected());
-			element.setOnDragDone(placeholder.getOnDragDone());
-			selectedPane.getChildren().add(element);
-			
-			selectedElement = element;
+			addElement(textbox.getText(), selectedPane);
 		//	System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
 		}
 		textbox.setText("");
 		textbox.requestFocus();
+		System.out.println(file.toString());
 
+	}
+	
+	
+	
+	@FXML
+	public void saveButton(ActionEvent event) throws FileNotFoundException {
+		
+		file.save("t.out");
+		
+	}
+	
+	
+	@FXML
+	public void loadButton(ActionEvent event) throws FileNotFoundException {
+		
+		file.read("t.out");
+		System.out.println(file.toString());
+		
+	}
+
+
+
+
+
+
+	public void addElement(String text, Pane pane) {
+		
+		LabelSeri element = new LabelSeri(textbox.getText());
+		element.setFont(font);
+		element.setTextFill(textColor);
+		element.setWrapText(true);
+		element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
+		element.setOnDragDetected(placeholder.getOnDragDetected());
+		element.setOnDragDone(placeholder.getOnDragDone());
+		pane.getChildren().add(element);
+	
+		elementList.add(element);
+		selectedElement = element;
+		
 	}
 
 	/*
 	 * Selects a set by mouse click, deselects the previous selection. Requires the
 	 * Shape to be the first node in the selected pane, and the pane containing
 	 * labels to be the second.
+	 * 
+	 * Depreciated
 	 */
 	@FXML
-	public void selectSet(MouseEvent event) {
+	public void selectSet(MouseEvent event) { 
 
 //		if (event.getButton() == MouseButton.PRIMARY || event.isPrimaryButtonDown()) {
 //			deselectAll(event);
@@ -303,8 +350,8 @@ public class FXController {
 			//	selectedShape.con
 				event.setDropCompleted(true);  
 				selectedLabel.setLayoutX(0);
-				selectedLabel.setLayoutY(event.getSceneY() + y); 
-				System.out.println("test");
+				selectedLabel.setLayoutY(0); 
+
 			//}
 		}
 		else {
