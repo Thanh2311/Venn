@@ -11,21 +11,25 @@ import java.util.List;
 
 import javafx.scene.control.Label;
 
-public class File {
+public class LabelData implements Serializable{
 	
 	
-	public List<LabelSeri> elementList;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public List<LabelSerializable> elementList;
 	
 	
-	public File() {
-		elementList = new ArrayList<LabelSeri>();	
+	public LabelData() {
+		elementList = new ArrayList<LabelSerializable>();	
 	}
 	
 	
-	public List<LabelSeri> getFiles() {
+	public List<LabelSerializable> getList() {
 		return elementList;
 	}
-	public void setFiles(List<LabelSeri> in) {
+	public void setFiles(List<LabelSerializable> in) {
 		elementList = in;
 	}
 	
@@ -47,7 +51,7 @@ public class File {
 	}
 	
 	
-	public void read(String fileName) throws FileNotFoundException {
+	public void read(File fileName) throws FileNotFoundException {
 
 		try {
 			FileInputStream fin= new FileInputStream (fileName);
@@ -58,7 +62,7 @@ public class File {
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +74,7 @@ public class File {
 	@Override
 	public String toString() {
 		String contents = "";
-		for (Label i : elementList){
+		for (LabelSerializable i : elementList){
 			contents += (i.getText() + ", ");
 		}
 		return contents;

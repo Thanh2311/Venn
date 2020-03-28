@@ -1,6 +1,7 @@
 package Venn;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +28,17 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
-import Venn.LabelSeri;
+import javafx.stage.FileChooser;
 
 public class FXController {
 
@@ -43,9 +46,13 @@ public class FXController {
 	private static final DataFormat LABEL_FORMAT = new DataFormat("label");
 	
 	
-	public File file;
+	public LabelData labelData;
 	
-	public List<LabelSeri> elementList;
+	public List<LabelSerializable> elementList;
+	
+	private FileChooser chooser;
+	
+    private File file;
 	
 	@FXML
 	private Font font;
@@ -102,9 +109,11 @@ public class FXController {
 	@FXML
 	private void initialize() {
 		
-		file = new File();
+		labelData = new LabelData();
 		
-		elementList = file.getFiles();
+		elementList = labelData.getList();
+		
+		chooser = new FileChooser();
 
 	
 		font = Font.getDefault();	//initializes font and color
@@ -190,7 +199,7 @@ public class FXController {
 		}
 		textbox.setText("");
 		textbox.requestFocus();
-		System.out.println(file.toString());
+		System.out.println(labelData.toString());
 
 	}
 	
@@ -199,39 +208,30 @@ public class FXController {
 	@FXML
 	public void saveButton(ActionEvent event) throws FileNotFoundException {
 		
-		file.save("t.out");
+		labelData.save("t.out");
 		
 	}
 	
 	
 	@FXML
 	public void loadButton(ActionEvent event) throws FileNotFoundException {
-		
-		file.read("t.out");
-		System.out.println(file.toString());
-		
-	}
-
-
-
-
-
-
-	public void addElement(String text, Pane pane) {
-		
-		LabelSeri element = new LabelSeri(textbox.getText());
-		element.setFont(font);
-		element.setTextFill(textColor);
-		element.setWrapText(true);
-		element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
-		element.setOnDragDetected(placeholder.getOnDragDetected());
-		element.setOnDragDone(placeholder.getOnDragDone());
-		pane.getChildren().add(element);
 	
-		elementList.add(element);
-		selectedElement = element;
-		
+	    chooser.setTitle("Open File");
+	    if (file != null)
+	    	chooser.setInitialDirectory(file.getParentFile());
+	    file = chooser.showOpenDialog(null);
+	    if (file != null) {
+	    	labelData.read(file);
+			System.out.println(labelData.toString());
+	    }
 	}
+
+
+
+
+
+
+
 
 	/*
 	 * Selects a set by mouse click, deselects the previous selection. Requires the
@@ -397,7 +397,21 @@ public class FXController {
 	
 
 	
+	public void addElement(String text, Pane pane) {
+		
+		Label element = new Label(text);
+		element.setFont(font);
+		element.setTextFill(textColor);
+		element.setWrapText(true);
+		element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
+		element.setOnDragDetected(placeholder.getOnDragDetected());
+		element.setOnDragDone(placeholder.getOnDragDone());
+		pane.getChildren().add(element);
 	
+		elementList.add(new LabelSerializable(element));
+		selectedElement = element;
+		
+	}
 	  
 
 
