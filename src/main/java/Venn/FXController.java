@@ -39,6 +39,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class FXController {
 
@@ -79,6 +80,8 @@ public class FXController {
 	@FXML
 	private Button saveButton;
 	@FXML
+	private Button saveAsButton;
+	@FXML
 	private Button loadButton;
 	@FXML
 	private Pane newLabelPaneLeft;
@@ -114,6 +117,8 @@ public class FXController {
 		elementList = labelData.getList();
 		
 		chooser = new FileChooser();
+		chooser.getExtensionFilters().add((new FileChooser.ExtensionFilter("Venn Files(*.venn)", "*.venn")));
+
 
 	
 		font = Font.getDefault();	//initializes font and color
@@ -208,7 +213,13 @@ public class FXController {
 	@FXML
 	public void saveButton(ActionEvent event) throws FileNotFoundException {
 		
-		labelData.save("t.out");
+		chooser.setTitle("Save File");
+		chooser.setInitialFileName("NewDiagram");
+		if (file != null)
+			chooser.setInitialDirectory(file.getParentFile());
+		file = chooser.showSaveDialog(null);
+		if (file != null)
+			labelData.save(file);
 		
 	}
 	
@@ -222,6 +233,14 @@ public class FXController {
 	    file = chooser.showOpenDialog(null);
 	    if (file != null) {
 	    	labelData.read(file);
+	    	for (LabelSerializable i : labelData.getList()) {
+	    		selectedElement = addElement(i.getText(), (Pane) root.lookup("#"+ i.getParent()));
+	    		selectedElement.setFont(new Font(i.getFont(), i.getSize()));
+	    		selectedElement.setLayoutX(i.getX());
+	    		selectedElement.setLayoutY(i.getY());
+	    		selectedElement.setTextFill(new Color(i.getRed(), i.getGreen(),
+	    				i.getBlue(), i.getOpacity()));
+	    	}
 			System.out.println(labelData.toString());
 	    }
 	}
@@ -397,7 +416,7 @@ public class FXController {
 	
 
 	
-	public void addElement(String text, Pane pane) {
+	public Label addElement(String text, Pane pane) {
 		
 		Label element = new Label(text);
 		element.setFont(font);
@@ -411,6 +430,7 @@ public class FXController {
 		elementList.add(new LabelSerializable(element));
 		selectedElement = element;
 		
+		return element;
 	}
 	  
 

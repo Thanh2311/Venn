@@ -34,7 +34,7 @@ public class LabelData implements Serializable{
 	}
 	
 	
-	public void save(String fileName) throws FileNotFoundException {
+	public void save(File fileName) throws FileNotFoundException {
 
 		try {
 			FileOutputStream fout= new FileOutputStream (fileName);
@@ -63,10 +63,14 @@ public class LabelData implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		catch (StreamCorruptedException e) {
+			System.out.println("Not a real .venn file.");
+		}
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		
 	}
 	

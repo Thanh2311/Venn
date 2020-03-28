@@ -94,6 +94,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="1.0">
                            <children>
                               <Button fx:id="saveButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#saveButton" text="Save" />
+                              <Button fx:id="saveaAsButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#saveButton" text="Save As" />
                               <Button fx:id="loadButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#loadButton" text="Load" />
                            </children>
                         </HBox>
