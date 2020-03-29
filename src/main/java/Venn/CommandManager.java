@@ -33,10 +33,12 @@ public class CommandManager {
 			Command old = undoStack.pop();
 			redoStack.push(old);
 			
-			if (old.hasRemoved()) 
+			if (old.hasRemoved()) {
 				elementList.add(old.getRemovedLabel());
-			if (old.hasNew())
+				}
+			if (old.hasNew()) {
 				labelData.update(old.getNewLabel().getText());
+			}
 		}
 	}
 	

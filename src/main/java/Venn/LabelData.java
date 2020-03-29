@@ -80,8 +80,9 @@ public class LabelData implements Serializable{
 		Iterator<LabelSerializable> itr = elementList.iterator();
 		while (itr.hasNext()) {
 			LabelSerializable label = itr.next();
-			if (label.getText().equals(oldText))
+			if (label.getText().equals(oldText)) {
 				itr.remove();
+			}
 		}
 	}
 	

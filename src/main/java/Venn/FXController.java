@@ -99,6 +99,12 @@ public class FXController {
 	@FXML
 	private Pane selectedPane;
 	@FXML
+	private Pane leftPane;
+	@FXML
+	private Pane rightPane;
+	@FXML
+	private Pane middlePane;
+	@FXML
 	private Shape selectedShape;
 	@FXML
 	private Label selectedTitle;
@@ -287,7 +293,7 @@ public class FXController {
 	public void undoButton(ActionEvent event) {
 		undoManager.undo();
 		load();
-		System.out.println(labelData.toString());
+		//System.out.println(labelData.toString());
 	}
 	
 	
@@ -295,7 +301,7 @@ public class FXController {
 	public void redoButton(ActionEvent event) {
 		undoManager.redo();
 		load();
-		System.out.println(labelData.toString());
+		//System.out.println(labelData.toString());
 	}
 	
 	@FXML
@@ -578,11 +584,16 @@ public class FXController {
 	
 	
 	public void clearUI() {
-		for(LabelSerializable label : elementList) {
-			Pane pane = (Pane) root.lookup("#"+ label.getParent());
-			pane.getChildren().clear();
-		}
+//		for(LabelSerializable label : elementList) {
+//			Pane pane = (Pane) root.lookup("#"+ label.getParent());
+//			pane.getChildren().clear();
+//		}
 		//elementList.clear();
+		
+		selectedPane.getChildren().clear();
+		leftPane.getChildren().clear();
+		rightPane.getChildren().clear();
+		middlePane.getChildren().clear();
 	}
 	
 	public void load() {
