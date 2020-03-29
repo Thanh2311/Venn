@@ -53,6 +53,8 @@ public class FXController {
 	private FileChooser chooser;
 	
     private File file;
+    
+    private CommandManager undoManager;
 	
 	@FXML
 	private Font font;
@@ -82,6 +84,14 @@ public class FXController {
 	private Button saveAsButton;
 	@FXML
 	private Button loadButton;
+	@FXML
+	private Button clearButton;
+	@FXML
+	private Button undoButton;
+	@FXML
+	private Button redoButton;
+	@FXML
+	private Button testButton;
 	@FXML
 	private Pane newLabelPaneLeft;
 	@FXML
@@ -117,7 +127,8 @@ public class FXController {
 		
 		chooser = new FileChooser();
 		chooser.getExtensionFilters().add((new FileChooser.ExtensionFilter("Venn Files(*.venn)", "*.venn")));
-
+		
+		undoManager = new CommandManager(labelData);
 
 	
 		font = Font.getDefault();	//initializes font and color
@@ -195,23 +206,34 @@ public class FXController {
 	 * Adds a new Label to the left box
 	 */
 	@FXML
-	public void addEleButton(ActionEvent event) {
+	public void addButton(ActionEvent event) {
 
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
 			addElement(textbox.getText(), selectedPane);
-			elementList.add(new LabelSerializable(selectedElement));
+			LabelSerializable exe = new LabelSerializable(selectedElement);
+			elementList.add(exe);
+			undoManager.execute(null, exe);
 		//	System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
 		}
 		textbox.setText("");
 		textbox.requestFocus();
-		System.out.println(labelData.toString());
+		//System.out.println(labelData.toString());
 
 	}
 	
-	
-	
 	@FXML
 	public void saveButton(ActionEvent event) throws FileNotFoundException {
+		if (file != null) {
+			labelData.save(file);
+			System.out.println("Saved to " + file.getName());
+		}
+		else {
+			saveAsButton(event);
+		}
+	}
+	
+	@FXML
+	public void saveAsButton(ActionEvent event) throws FileNotFoundException {
 		
 		chooser.setTitle("Save File");
 		chooser.setInitialFileName("NewDiagram");
@@ -228,27 +250,60 @@ public class FXController {
 	public void loadButton(ActionEvent event) throws FileNotFoundException {
 	
 	    chooser.setTitle("Open File");
+	    
+	    chooser.setInitialFileName("NewDiagram");
 	    if (file != null)
 	    	chooser.setInitialDirectory(file.getParentFile());
 	    file = chooser.showOpenDialog(null);
 	    if (file != null) {
+	    	//clear();
+	    	elementList.clear();
 	    	labelData.read(file);
 	    	//elementList = labelData.getList();
-	    	for (LabelSerializable i : elementList) {
-	    		selectedElement = addElement(i.getText(), (Pane) root.lookup("#"+ i.getParent()));
-	    		selectedElement.setFont(new Font(i.getFont(), i.getSize()));
-	    		selectedElement.setLayoutX(i.getX());
-	    		selectedElement.setLayoutY(i.getY());
-	    		selectedElement.setTextFill(new Color(i.getRed(), i.getGreen(),
-	    				i.getBlue(), i.getOpacity()));
-	    	}
-			System.out.println(labelData.toString());
-			System.out.println(elementList.get(0).getParent());
+	    	load();
+	    	System.out.println(file.getName() + " loaded");
 	    }
 	}
 
+	@FXML
+	public void clearButton(ActionEvent event) {
 
+		Alert dialog = new Alert(AlertType.CONFIRMATION);
+		dialog.setTitle("Clear All");
+		dialog.setContentText("Are you sure you want to clear all elements?");
+		dialog.setHeaderText(null);
+		dialog.setGraphic(null);
+		dialog.getDialogPane().setMaxSize(100, 100);
+		Optional<ButtonType> result = dialog.showAndWait();
+		// checks if you clicked ok or cancel
+		if (result.get() == ButtonType.OK) {
+			clearUI();
+			elementList.clear();
+		}
 
+	}
+
+	@FXML
+	public void undoButton(ActionEvent event) {
+		undoManager.undo();
+		load();
+		System.out.println(labelData.toString());
+	}
+	
+	
+	@FXML
+	public void redoButton(ActionEvent event) {
+		undoManager.redo();
+		load();
+		System.out.println(labelData.toString());
+	}
+	
+	@FXML
+	public void testButton(ActionEvent event) {
+	
+		System.out.println(labelData.toString());
+	}
+	
 	/*
 	 * Selects a set by mouse click, deselects the previous selection. Requires the
 	 * Shape to be the first node in the selected pane, and the pane containing
@@ -429,6 +484,8 @@ public class FXController {
 		
 		selectedElement = element;
 		
+		
+		
 		return element;
 	}
 	  
@@ -519,6 +576,28 @@ public class FXController {
 		
 	}
 	
+	
+	public void clearUI() {
+		for(LabelSerializable label : elementList) {
+			Pane pane = (Pane) root.lookup("#"+ label.getParent());
+			pane.getChildren().clear();
+		}
+		//elementList.clear();
+	}
+	
+	public void load() {
+		clearUI();
+		
+		for (LabelSerializable i : elementList) {
+    		selectedElement = addElement(i.getText(),
+    				(Pane)root.lookup("#"+ i.getParent()));
+    		selectedElement.setFont(new Font(i.getFont(), i.getSize()));
+    		selectedElement.setLayoutX(i.getX());
+    		selectedElement.setLayoutY(i.getY());
+    		selectedElement.setTextFill(new Color(i.getRed(), i.getGreen(),
+    				i.getBlue(), i.getOpacity()));
+    	}
+	}
 
 
 }

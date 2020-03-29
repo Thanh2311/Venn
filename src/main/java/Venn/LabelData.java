@@ -85,11 +85,9 @@ public class LabelData implements Serializable{
 		}
 	}
 	
-	
 	public void update(Label oldLabel) {
 		update(oldLabel.getText());
 	}
-	
 	
 	public void update(Label oldLabel, Label newLabel) {
 		update(oldLabel);
@@ -101,6 +99,9 @@ public class LabelData implements Serializable{
 		elementList.add(new LabelSerializable(newLabel));		
 	}
 	
+	public void clearData() {
+		elementList.clear();
+	}
 	
 	
 	

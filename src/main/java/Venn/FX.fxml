@@ -94,14 +94,15 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="1.0">
                            <children>
                               <Button fx:id="saveButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#saveButton" text="Save" />
-                              <Button fx:id="saveaAsButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#saveButton" text="Save As" />
+                              <Button fx:id="saveaAsButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#saveAsButton" text="Save As" />
                               <Button fx:id="loadButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#loadButton" text="Load" />
+                              <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#clearButton" text="Clear All" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="1.0">
                            <children>
                               <TextField fx:id="textbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="162.0" promptText="Enter name here" />
-                              <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#addEleButton" text="Add" />
+                              <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#addButton" text="Add" />
                            </children>
                         </HBox>
                         <StackPane>
@@ -133,6 +134,13 @@
                               </HBox>
                            </children>
                         </VBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="undoButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#undoButton" text="Undo" />
+                              <Button fx:id="redoButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#redoButton" text="Redo" />
+                              <Button fx:id="testButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#testButton" text="CheckData" />
+                           </children>
+                        </HBox>
                      </children>
                      <BorderPane.margin>
                         <Insets left="1.0" />
