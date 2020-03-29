@@ -243,13 +243,9 @@ public class FXController {
 	    				i.getBlue(), i.getOpacity()));
 	    	}
 			System.out.println(labelData.toString());
+			System.out.println(elementList.get(0).getParent());
 	    }
 	}
-
-
-
-
-
 
 
 
@@ -359,6 +355,7 @@ public class FXController {
 	@FXML
 	public void setOnDragDropped(DragEvent event) {
 		Dragboard db = event.getDragboard();
+		String oldText = selectedLabel.getText();
 		
 		if (selectedShape == border) 
 			delete();
@@ -379,7 +376,7 @@ public class FXController {
 			selectedLabel.setLayoutY(event.getSceneY() + y); 
 			//selectedLabel.trans
 		}
-		
+		labelData.update(oldText, selectedLabel);
 	}
 	
 	
@@ -413,6 +410,7 @@ public class FXController {
 
 		textColor = colorBox.getValue();
 	}
+	
 	
 	
 
@@ -449,6 +447,7 @@ public class FXController {
 		if (result.get() == ButtonType.OK) {
 			System.out.printf("\"%s\" deleted\n", selectedLabel.getText());
 			((Pane) selectedLabel.getParent()).getChildren().remove(selectedLabel);
+			labelData.update(selectedLabel.getText());
 		}
 	}
 
@@ -466,6 +465,7 @@ public class FXController {
 		if (result.isPresent() && !newText.trim().isEmpty()) {
 			selectedLabel.setText(newText);
 			System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
+			labelData.update(oldText, selectedLabel);
 		}
 
 	}
@@ -473,6 +473,7 @@ public class FXController {
 	
 	public void customize() {	// Structured poorly, mostly just recreating colorBox,fontBox, and fontSizeBox for use in contextmenu
 		
+		String oldText = selectedLabel.getText();
 		Alert dialog = new Alert(AlertType.CONFIRMATION);
 		
 		DialogPane dpane = dialog.getDialogPane();
@@ -512,9 +513,12 @@ public class FXController {
 			else
 				selectedLabel.setFont(new Font(font.getValue(), Double.parseDouble(sizebox.getValue())));
 			selectedLabel.setTextFill(color.getValue());
+			labelData.update(oldText, selectedLabel);
 			System.out.println(font.getValue());
 		}
 		
 	}
+	
+
 
 }

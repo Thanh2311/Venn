@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.scene.control.Label;
@@ -72,8 +73,35 @@ public class LabelData implements Serializable{
 			e.printStackTrace();
 		}
 
-		
 	}
+	
+	
+	public void update(String oldText) {
+		Iterator<LabelSerializable> itr = elementList.iterator();
+		while (itr.hasNext()) {
+			LabelSerializable label = itr.next();
+			if (label.getText().equals(oldText))
+				itr.remove();
+		}
+	}
+	
+	
+	public void update(Label oldLabel) {
+		update(oldLabel.getText());
+	}
+	
+	
+	public void update(Label oldLabel, Label newLabel) {
+		update(oldLabel);
+		elementList.add(new LabelSerializable(newLabel));		
+	}
+	
+	public void update(String oldText, Label newLabel) {
+		update(oldText);
+		elementList.add(new LabelSerializable(newLabel));		
+	}
+	
+	
 	
 	
 	@Override

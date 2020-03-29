@@ -43,7 +43,7 @@
                               <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefHeight="500.0" prefWidth="250.0">
                                  <children>
                                     <Circle blendMode="DARKEN" fill="#e35d5d66" radius="250.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
+                                    <Pane fx:id="leftPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                            </children>
@@ -58,7 +58,7 @@
                               <StackPane alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#setOnDragDropped" onDragExited="#setOnDragExited" onDragOver="#setOnDragOver" onMouseClicked="#selectSet" pickOnBounds="false" prefWidth="250.0">
                                  <children>
                                     <Circle blendMode="DARKEN" fill="#2197ff66" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
+                                    <Pane fx:id="rightPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                            </children>
@@ -80,7 +80,7 @@
                                             <ArcTo radiusX="250.0" radiusY="250.0" sweepFlag="true" y="433.0" />
                                         </elements>
                                     </Path>
-                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
+                                    <Pane fx:id="middlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                            </children>
