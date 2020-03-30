@@ -1,12 +1,13 @@
 package Venn;
 
-import javafx.application.*;
-import javafx.beans.property.DoubleProperty;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.*;
-import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class ApplicationWindow extends Application {
 	

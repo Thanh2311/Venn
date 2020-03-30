@@ -20,6 +20,7 @@ public class LabelData implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	public ArrayList<LabelSerializable> elementList;
+	private CommandManager undoManager;
 	
 	
 	public LabelData() {
@@ -76,28 +77,41 @@ public class LabelData implements Serializable{
 	}
 	
 	
-	public void update(String oldText) {
+	public LabelSerializable update(String oldText) {
+		//undoManager.execute();
+
 		Iterator<LabelSerializable> itr = elementList.iterator();
+		LabelSerializable label = null;
 		while (itr.hasNext()) {
-			LabelSerializable label = itr.next();
+			label = itr.next();
 			if (label.getText().equals(oldText)) {
 				itr.remove();
+				break;
 			}
 		}
+		return label;
 	}
 	
-	public void update(Label oldLabel) {
-		update(oldLabel.getText());
+	public LabelSerializable update(Label oldLabel) {
+		return update(oldLabel.getText());
 	}
 	
-	public void update(Label oldLabel, Label newLabel) {
-		update(oldLabel);
+	public LabelSerializable update(Label oldLabel, Label newLabel) {
+		
+		elementList.add(new LabelSerializable(newLabel));	
+		return update(oldLabel);	
+	}
+	
+	public LabelSerializable update(String oldText, Label newLabel) {
+		
 		elementList.add(new LabelSerializable(newLabel));		
+		return update(oldText);
 	}
 	
-	public void update(String oldText, Label newLabel) {
-		update(oldText);
-		elementList.add(new LabelSerializable(newLabel));		
+	public void add(Label label) {
+		undoManager.execute();
+		elementList.add(new LabelSerializable(label));
+		
 	}
 	
 	public void clearData() {
@@ -109,8 +123,13 @@ public class LabelData implements Serializable{
 	@Override
 	public String toString() {
 		String contents = "";
-		for (LabelSerializable i : elementList){
-			contents += (i.getText() + ", ");
+		if (elementList.isEmpty()) {
+			contents += "Empty data";
+		}
+		else {
+			for (LabelSerializable i : elementList){
+				contents += (i.getText() + ", ");
+			}
 		}
 		return contents;
 	}

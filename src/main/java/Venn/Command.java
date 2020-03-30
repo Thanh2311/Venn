@@ -1,39 +1,36 @@
 package Venn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Command {
 	
-	private LabelSerializable removedLabel;
-	private LabelSerializable newLabel;
+	private List<LabelSerializable> lastState;
 	
-	public Command(LabelSerializable removedLabel, LabelSerializable newLabel) {
+	public Command(ArrayList<LabelSerializable> lastState) {
 		super();
-		this.removedLabel = removedLabel;
-		this.newLabel = newLabel;
-	}
-
-	public LabelSerializable getRemovedLabel() {
-		return removedLabel;
-	}
-
-	public void setRemovedLabel(LabelSerializable removedLabel) {
-		this.removedLabel = removedLabel;
-	}
-
-	public LabelSerializable getNewLabel() {
-		return newLabel;
-	}
-
-	public void setNewLabel(LabelSerializable newLabel) {
-		this.newLabel = newLabel;
-	}
+		this.lastState = (ArrayList)lastState.clone();
 	
-	public Boolean hasNew() {
-		return (newLabel != null);
-	}
-	
-	public Boolean hasRemoved() {
-		return (removedLabel != null);
 	}
 
+	public List<LabelSerializable> getLastState() {
+		return lastState;
+	}
+
+	public void setLastState(List<LabelSerializable> lastState) {
+		this.lastState = lastState;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String contain = "";
+		for (LabelSerializable i : lastState) {
+			contain += i.getText() + ", " ;
+		}
+		return contain;
+	}
+
+	
 
 }

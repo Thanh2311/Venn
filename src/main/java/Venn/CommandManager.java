@@ -17,41 +17,38 @@ public class CommandManager {
 		redoStack = new Stack<>();
 		this.labelData = labelData;
 		this.elementList = labelData.getList();
-		
+		execute();
 		
 	}
 	
-	public void execute(LabelSerializable removedLabel,
-			LabelSerializable newLabel) {
+	public void execute() {
 		
-		undoStack.push(new Command(removedLabel,newLabel));
+		undoStack.push(new Command(labelData.getList()));
 		redoStack.clear();
-	}
+		}
 	
 	public void undo() {
-		if (undoStack.size() != 0) {
-			Command old = undoStack.pop();
-			redoStack.push(old);
-			
-			if (old.hasRemoved()) {
-				elementList.add(old.getRemovedLabel());
-				}
-			if (old.hasNew()) {
-				labelData.update(old.getNewLabel().getText());
-			}
+		
+		if (undoStack.size() > 1) {
+			Command command = undoStack.pop();
+			redoStack.push(new Command(labelData.getList()));
+			elementList.clear();
+			elementList.addAll(command.getLastState());
 		}
 	}
 	
 	public void redo() {
-		if (redoStack.size() != 0) {
-			Command newLabel = redoStack.pop();
-			undoStack.push(newLabel);
-			
-			if (newLabel.hasNew()) 
-				elementList.add(newLabel.getNewLabel());
-			if (newLabel.hasRemoved())
-				labelData.update(newLabel.getRemovedLabel().getText());
+		
+		if (redoStack.size() > 0) {
+			Command command = redoStack.pop();
+			undoStack.push(new Command(labelData.getList()));
+			elementList.clear();
+			elementList.addAll(command.getLastState());
 		}
 	}
+
+
+	
+	
 
 }

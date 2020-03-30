@@ -215,11 +215,9 @@ public class FXController {
 	public void addButton(ActionEvent event) {
 
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
+			undoManager.execute();
 			addElement(textbox.getText(), selectedPane);
-			LabelSerializable exe = new LabelSerializable(selectedElement);
-			elementList.add(exe);
-			undoManager.execute(null, exe);
-		//	System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
+			elementList.add(new LabelSerializable(selectedElement));
 		}
 		textbox.setText("");
 		textbox.requestFocus();
@@ -262,10 +260,9 @@ public class FXController {
 	    	chooser.setInitialDirectory(file.getParentFile());
 	    file = chooser.showOpenDialog(null);
 	    if (file != null) {
-	    	//clear();
+	    	//undoManager.execute();
 	    	elementList.clear();
 	    	labelData.read(file);
-	    	//elementList = labelData.getList();
 	    	load();
 	    	System.out.println(file.getName() + " loaded");
 	    }
@@ -283,6 +280,7 @@ public class FXController {
 		Optional<ButtonType> result = dialog.showAndWait();
 		// checks if you clicked ok or cancel
 		if (result.get() == ButtonType.OK) {
+			undoManager.execute();
 			clearUI();
 			elementList.clear();
 		}
@@ -293,7 +291,7 @@ public class FXController {
 	public void undoButton(ActionEvent event) {
 		undoManager.undo();
 		load();
-		//System.out.println(labelData.toString());
+	//	System.out.println(labelData.toString());
 	}
 	
 	
@@ -301,7 +299,7 @@ public class FXController {
 	public void redoButton(ActionEvent event) {
 		undoManager.redo();
 		load();
-		//System.out.println(labelData.toString());
+	//	System.out.println(labelData.toString());
 	}
 	
 	@FXML
@@ -415,8 +413,11 @@ public class FXController {
 	
 	@FXML
 	public void setOnDragDropped(DragEvent event) {
+		
+		undoManager.execute();
 		Dragboard db = event.getDragboard();
 		String oldText = selectedLabel.getText();
+		
 		
 		if (selectedShape == border) 
 			delete();
@@ -447,6 +448,7 @@ public class FXController {
 		border.setOpacity(0);
 		selectedLabel.setOpacity(1);
 		selectedLabel.setCursor(Cursor.HAND); 
+		
 	  }
 	
 	
@@ -468,7 +470,6 @@ public class FXController {
 	
 	@FXML 
 	public void updateColor(ActionEvent event) {
-
 		textColor = colorBox.getValue();
 	}
 	
@@ -508,9 +509,11 @@ public class FXController {
 		Optional<ButtonType> result = dialog.showAndWait();
 		// checks if you clicked ok or cancel
 		if (result.get() == ButtonType.OK) {
+			undoManager.execute();
 			System.out.printf("\"%s\" deleted\n", selectedLabel.getText());
 			((Pane) selectedLabel.getParent()).getChildren().remove(selectedLabel);
-			labelData.update(selectedLabel.getText());
+			//labelData.update(selectedLabel.getText());
+			//undoManager.execute(labelData.update(selectedLabel.getText()), null);
 		}
 	}
 
@@ -526,6 +529,7 @@ public class FXController {
 		String newText = dialog.getEditor().getText();
 		// checks if you clicked ok or cancel
 		if (result.isPresent() && !newText.trim().isEmpty()) {
+			undoManager.execute();
 			selectedLabel.setText(newText);
 			System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
 			labelData.update(oldText, selectedLabel);
@@ -566,6 +570,7 @@ public class FXController {
 		Optional<ButtonType> result = dialog.showAndWait();
 		// checks if you clicked ok or cancel
 		if (result.get() == ButtonType.OK) {
+			undoManager.execute();
 			String size = sizebox.getValue(); 
 			if (size == null || size.isEmpty() || !size.matches("[0-9]+")) 
 				sizebox.setValue(Integer.toString((int)selectedLabel.getFont().getSize()));
@@ -589,7 +594,6 @@ public class FXController {
 //			pane.getChildren().clear();
 //		}
 		//elementList.clear();
-		
 		selectedPane.getChildren().clear();
 		leftPane.getChildren().clear();
 		rightPane.getChildren().clear();
@@ -607,6 +611,7 @@ public class FXController {
     		selectedElement.setLayoutY(i.getY());
     		selectedElement.setTextFill(new Color(i.getRed(), i.getGreen(),
     				i.getBlue(), i.getOpacity()));
+    		System.out.println(i.getText()+ " printed");
     	}
 	}
 
