@@ -20,8 +20,11 @@ public class CommandManager {
 		execute();
 		
 	}
-	
-	public void execute() {
+
+	/*
+	 * Call before any changes to elementList to save its state
+	 */	
+	public void execute() { 
 		
 		undoStack.push(new Command(labelData.getList()));
 		redoStack.clear();

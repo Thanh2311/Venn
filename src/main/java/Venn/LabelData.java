@@ -19,23 +19,31 @@ public class LabelData implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public ArrayList<LabelSerializable> elementList;
+	private ArrayList<LabelSerializable> elementList;
 	private CommandManager undoManager;
 	
 	
 	public LabelData() {
 		elementList = new ArrayList<LabelSerializable>();	
+		undoManager = new CommandManager(this);
 	}
 	
 	
 	public ArrayList<LabelSerializable> getList() {
 		return elementList;
 	}
+	
+	
 	public void setFiles(ArrayList<LabelSerializable> in) {
 		elementList = in;
 	}
 	
 	
+	public CommandManager getUndoManager() {
+		return undoManager;
+	}
+
+
 	public void save(File fileName) throws FileNotFoundException {
 
 		try {
@@ -77,8 +85,8 @@ public class LabelData implements Serializable{
 	}
 	
 	
-	public LabelSerializable update(String oldText) {
-		//undoManager.execute();
+	public LabelSerializable remove(String oldText) {
+		undoManager.execute();
 
 		Iterator<LabelSerializable> itr = elementList.iterator();
 		LabelSerializable label = null;
@@ -92,20 +100,20 @@ public class LabelData implements Serializable{
 		return label;
 	}
 	
-	public LabelSerializable update(Label oldLabel) {
-		return update(oldLabel.getText());
+	public void remove(Label oldLabel) {
+		 remove(oldLabel.getText());
 	}
 	
-	public LabelSerializable update(Label oldLabel, Label newLabel) {
-		
+	public void update(Label oldLabel, Label newLabel) {
+		remove(oldLabel);	
+		elementList.add(new LabelSerializable(newLabel));
+		 
+	}
+	
+	public void update(String oldText, Label newLabel) {
+		remove(oldText);
 		elementList.add(new LabelSerializable(newLabel));	
-		return update(oldLabel);	
-	}
-	
-	public LabelSerializable update(String oldText, Label newLabel) {
 		
-		elementList.add(new LabelSerializable(newLabel));		
-		return update(oldText);
 	}
 	
 	public void add(Label label) {

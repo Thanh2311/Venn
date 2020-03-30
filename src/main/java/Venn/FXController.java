@@ -134,8 +134,8 @@ public class FXController {
 		chooser = new FileChooser();
 		chooser.getExtensionFilters().add((new FileChooser.ExtensionFilter("Venn Files(*.venn)", "*.venn")));
 		
-		undoManager = new CommandManager(labelData);
-
+		//undoManager = new CommandManager(labelData);
+		undoManager = labelData.getUndoManager();
 	
 		font = Font.getDefault();	//initializes font and color
 		textColor = Color.BLACK;
@@ -215,9 +215,10 @@ public class FXController {
 	public void addButton(ActionEvent event) {
 
 		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
-			undoManager.execute();
+		//	undoManager.execute();
 			addElement(textbox.getText(), selectedPane);
-			elementList.add(new LabelSerializable(selectedElement));
+			labelData.add(selectedElement);
+		//	elementList.add(new LabelSerializable(selectedElement));
 		}
 		textbox.setText("");
 		textbox.requestFocus();
@@ -252,7 +253,7 @@ public class FXController {
 	
 	@FXML
 	public void loadButton(ActionEvent event) throws FileNotFoundException {
-	
+		undoManager.execute();
 	    chooser.setTitle("Open File");
 	    
 	    chooser.setInitialFileName("NewDiagram");
@@ -414,7 +415,7 @@ public class FXController {
 	@FXML
 	public void setOnDragDropped(DragEvent event) {
 		
-		undoManager.execute();
+		//undoManager.execute();
 		Dragboard db = event.getDragboard();
 		String oldText = selectedLabel.getText();
 		
@@ -529,7 +530,7 @@ public class FXController {
 		String newText = dialog.getEditor().getText();
 		// checks if you clicked ok or cancel
 		if (result.isPresent() && !newText.trim().isEmpty()) {
-			undoManager.execute();
+			//undoManager.execute();
 			selectedLabel.setText(newText);
 			System.out.printf("\"%s\" renamed to \"%s\"\n", oldText, newText);
 			labelData.update(oldText, selectedLabel);
@@ -570,7 +571,7 @@ public class FXController {
 		Optional<ButtonType> result = dialog.showAndWait();
 		// checks if you clicked ok or cancel
 		if (result.get() == ButtonType.OK) {
-			undoManager.execute();
+			//undoManager.execute();
 			String size = sizebox.getValue(); 
 			if (size == null || size.isEmpty() || !size.matches("[0-9]+")) 
 				sizebox.setValue(Integer.toString((int)selectedLabel.getFont().getSize()));
@@ -611,7 +612,7 @@ public class FXController {
     		selectedElement.setLayoutY(i.getY());
     		selectedElement.setTextFill(new Color(i.getRed(), i.getGreen(),
     				i.getBlue(), i.getOpacity()));
-    		System.out.println(i.getText()+ " printed");
+    		//System.out.println(i.getText()+ " printed");
     	}
 	}
 
