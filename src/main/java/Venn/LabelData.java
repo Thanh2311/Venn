@@ -34,7 +34,7 @@ public class LabelData implements Serializable{
 	}
 	
 	
-	public void setFiles(ArrayList<LabelSerializable> in) {
+	public void setList(ArrayList<LabelSerializable> in) {
 		elementList = in;
 	}
 	

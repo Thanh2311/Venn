@@ -28,6 +28,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
@@ -134,9 +135,8 @@ public class FXController {
 		chooser = new FileChooser();
 		chooser.getExtensionFilters().add((new FileChooser.ExtensionFilter("Venn Files(*.venn)", "*.venn")));
 		
-		//undoManager = new CommandManager(labelData);
 		undoManager = labelData.getUndoManager();
-	
+
 		font = Font.getDefault();	//initializes font and color
 		textColor = Color.BLACK;
 
@@ -290,17 +290,31 @@ public class FXController {
 
 	@FXML
 	public void undoButton(ActionEvent event) {
+		undo();
+	//	System.out.println(labelData.toString());
+	}
+
+
+	public void undo() {
 		undoManager.undo();
 		load();
-	//	System.out.println(labelData.toString());
 	}
 	
 	
 	@FXML
 	public void redoButton(ActionEvent event) {
+		redo();
+	//	System.out.println(labelData.toString());
+	}
+
+
+
+
+
+
+	public void redo() {
 		undoManager.redo();
 		load();
-	//	System.out.println(labelData.toString());
 	}
 	
 	@FXML
