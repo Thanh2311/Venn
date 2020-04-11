@@ -8,9 +8,10 @@ jobs:
     docker:
       # specify the version you desire here
 
- #     - image: niccomlt/gradle-javafx:latest
- #    - image: danielmapar/gradle_and_node:2.0
-      - image: eecs2311/j8-gradle-node:latest
+      - image: niccomlt/gradle-javafx:latest
+
+      - image: danielmapar/gradle_and_node:2.0
+
   
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -27,15 +28,15 @@ jobs:
     steps:
       - checkout
       
-#       - run:
-#          name: Install zip, npm, and github-release
-#          command: |
-#             apt-get install -y zip
-#             curl -sL https://deb.nodesource.com/setup_10.x > install.sh
-#             chmod +x install.sh    
-#             ./install.sh 
-#             apt-get install -y nodejs
-#             npm install -g github-release-cli
+      - run:
+         name: Install zip, npm, and github-release
+         command: |
+            apt-get install -y zip
+            curl -sL https://deb.nodesource.com/setup_10.x > install.sh
+            chmod +x install.sh    
+            ./install.sh 
+            apt-get install -y nodejs
+            npm install -g github-release-cli
 
       # Download and cache dependencies
       - restore_cache:
