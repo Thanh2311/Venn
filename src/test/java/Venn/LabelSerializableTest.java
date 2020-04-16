@@ -55,6 +55,13 @@ class LabelSerializableTest {
 		assertEquals(data.getY(), label.getLayoutY());
 		
 	}	
+	@Test
+	void test4() {
+		LabelSerializable data = new LabelSerializable(label);
+		assertEquals(data.getParent(), label.getParent().getId());
+
+		
+	}	
 
 	
 		
