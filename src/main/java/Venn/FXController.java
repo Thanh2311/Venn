@@ -120,23 +120,7 @@ public class FXController {
 	/*
 	 * Adds a new Label to the selected Set's VBox, default Left
 	 */
-	@FXML
-	public void addEleButton(ActionEvent event) {
 
-		selectedPane = (selectedPane == null) ? newLabelPaneLeft : selectedPane;
-		if (!textbox.getText().isEmpty() && !textbox.getText().trim().isEmpty()) {
-			Label element = new Label(textbox.getText());
-			element.setFont(font);
-			element.setWrapText(true);
-			selectedPane.getChildren().add(element);
-			element.setOnContextMenuRequested(placeholder.getOnContextMenuRequested());
-			selectedElement = element;
-			System.out.println("\"" + textbox.getText() + "\" added to " + selectedTitle.getText());
-		}
-		textbox.setText("");
-		textbox.requestFocus();
-
-	}
 
 	/*
 	 * Selects a set by mouse click, deselects the previous selection. Requires the
