@@ -47,7 +47,7 @@ class CommandManagerTest {
 	void test2() {
 		CommandManager cmd = new CommandManager(labeldata);
 		
-		int rand = ((int)Math.random() *100);
+		int rand = ((int)(Math.random() + 1) * 100);
 		for (int i = 0; i < rand; i++) {
 			Label label2 = new Label("no");
 			parent.getChildren().add(label2);
