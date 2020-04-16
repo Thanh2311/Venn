@@ -50,6 +50,12 @@ public class CommandManager {
 		}
 	}
 
+	public List<LabelSerializable> getElementList() {
+		return elementList;
+	}
+
+
+	
 
 	
 	
