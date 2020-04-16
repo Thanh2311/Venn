@@ -3,12 +3,128 @@
  */
 package Venn;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+import org.junit.Test;
+
+import com.sun.prism.paint.Color;
+
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class LibraryTest {
-    @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
-    }
+		Command c1;
+		Label label1;
+		Label label2;
+		Label label3;
+		LabelData l1;
+		ArrayList<LabelSerializable> elementList;
+		CommandManager m1;
+		CommandManager m2;
+		 Stack<Command> undoStack;
+		 Stack<Command> redoStack;
+
+	
+	   @Test public void testCommandi() {
+		  // Pane parent = new Pane();
+		   //parent.setId("hello");
+		   //label1 = new Label("test");
+		  // label1.setTextFill(new Color(0.12,0.24,0.36,0.48, 0));
+		   //parent.getChildren().add(label1);
+		   //label1.setLayoutX(320);
+		   //label1.setLayoutY(59);
+		   
+		   
+		   
+	   }
+	   
+	   
+	   
+	   // LabelSerilizable class tests
+	   void test1() {
+	     
+	      // assertTrue("Size is default 2", md.getSize() == 2);
+	        
+			elementList = new ArrayList<LabelSerializable>();
+
+			
+
+
+			
+			LabelSerializable list1 = new LabelSerializable(label1);
+			LabelSerializable list2 = new LabelSerializable(label2);
+			LabelSerializable list3 = new LabelSerializable(label3);
+			
+			
+			
+			
+			assertTrue("Size is 1 ", list1.getSize() == 1);
+			
+
+			elementList.add(list1);
+			assertTrue("Size is 1 ", list1.getSize() == 1);
+			elementList.add(list2);
+			assertTrue("Size is 2 ", list1.getSize() == 2);
+			elementList.add(list3);
+			assertTrue("Size is 3 ", list1.getSize() == 3);
+
+
+
+			elementList.add(list2);
+			//elementList.add(list3);
+			System.out.println(elementList.size());
+
+	    }
+	   // LabelData Class tests
+	   void test2() {
+		    l1 = new LabelData();
+		   l1.add(label1);
+		   l1.setList(elementList);
+		   m1 = new CommandManager(l1);
+		   
+		   assertTrue("The list that is returned is the same:", l1.getList() == elementList);
+		   assertTrue("The list that is returned is the same:", l1.getUndoManager() == m1);
+		   l1.remove(label1);
+		   assertTrue("The list has one less element", elementList.size()== 2);
+		   l1.add(label1);
+		   assertTrue("The list has one more element", elementList.size()== 3);
+		   l1.clearData();
+		   assertTrue("The list has no  element", elementList.size()== 0);
+		   l1.add(label1);
+		   l1.add(label2);
+		   l1.add(label3);
+		   }
+	   // CommandManager Class tests
+	   void test3() {
+		   
+		   m2 = new CommandManager(l1);
+		   assertTrue("The undo stack has the same number of elements as elementList", undoStack.size()== 3);
+		   m2.undo();
+		   assertTrue("The undo stack has the one less element as elementList", undoStack.size()== 2);
+		   m2.redo();
+		   assertTrue("The elementList has the same number of elements as in the beggining", undoStack.size()== 3);
+
+		   
+		   
+		   
+		   
+		   
+		   
+	   }
+	   
+	   
+
 }
+
