@@ -46,13 +46,14 @@ class CommandManagerTest {
 	@Test
 	void test2() {
 		CommandManager cmd = new CommandManager(labeldata);
-		
 		int rand = ((int)(Math.random() + 1) * 100);
 		for (int i = 0; i < rand; i++) {
 			Label label2 = new Label("no");
 			parent.getChildren().add(label2);
 			labeldata.add(label2);
 		}
+		cmd.undo();
+		cmd.redo();
 		assertEquals(rand + 1, labeldata.getList().size());
 		
 	}
